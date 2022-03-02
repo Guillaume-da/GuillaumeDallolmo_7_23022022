@@ -1,0 +1,151 @@
+.search {
+    padding: 0 20px;
+    &__input-container {
+        position: relative;
+    }
+    &__input-icon {
+        position: absolute;
+        top: 26px;
+        left: 90%;
+
+        @include breakpoint-large {
+            left: 95%;
+        }
+    }
+    &__input {
+        width: 100%;
+        box-sizing: border-box;
+        background: #E7E7E7;
+        border: none;
+        border-radius: 5px;
+        height: 70px;
+        padding: 24px 12px;
+        position: relative;
+    }
+    &__buttons-wrapper {
+        border-radius: 5px;
+        margin-top: 25px;
+
+        @include breakpoint-large {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 20px;
+        }
+    }
+    &__button-container {
+        position: relative;
+
+        @include breakpoint-large {
+            display: inline-block;
+        }
+    }
+    &__button {
+        border: none;
+        border-radius: 5px;
+        color: white;
+        padding: 20px 0 20px 17px;
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 22px;
+        width: 170px;
+        margin-bottom: 12px;
+        position: relative;
+        text-align: left;
+        width: 100%;
+        cursor: pointer;
+        @include breakpoint-large {
+            font-size: 18px;
+            width: 170px;
+        }
+        &--blue-button {
+            background: $blue;
+        }
+        &--green-button {
+            background: $green;
+        }
+        &--red-button {
+            background: $primary-color;
+        }
+    }
+    &__dropdown-menu {
+        border-radius: 5px;
+        display: none;
+        position: absolute;
+        top: 0;
+        z-index: 999;
+        padding: 20px;
+        &--blue {
+            background: $blue;
+            z-index: 800;
+        }
+        &--green {
+            background: $green;
+            z-index: 600;
+        }
+        &--red {
+            background: $primary-color;
+            z-index: 400;
+        }
+        @include breakpoint-large {
+            width: 667px;
+        }
+    }
+    &__dropdown-menu-header {
+        display: flex;
+        column-gap: 16%;
+    }
+    &__dropdown-menu-input {
+        background: transparent;
+        border: none;
+        width: 80%;
+        color: white;
+    }
+    &__dropdown-menu-input:focus {
+        outline: none;
+    }
+    &__dropdown-menu-input::placeholder {
+        color: #FFFFFF;
+        opacity: 0.5;
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    &__dropdown-menu-input-icon {
+        color: white;
+        cursor: pointer;
+    }
+    
+    &__button-icon {
+        color: white;
+        position: absolute;
+        top: 25px;
+        left: 90%;
+        @include breakpoint-large {
+            left: 82%;
+        }
+    }
+    &__dropdown-menu-list {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        color: white;
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 20px;
+    }
+    &__dropdown-menu-link {
+        width: 48%;
+        @include breakpoint-large {
+            width: 26%;
+            font-size: 18px;
+        }
+    }
+}

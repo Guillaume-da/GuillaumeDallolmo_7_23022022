@@ -1,0 +1,9 @@
+body {
+    @include breakpoint-large {
+        padding: 0 100px;
+    }   
+}
+
+.main {
+    padding: 20px 10px;
+}

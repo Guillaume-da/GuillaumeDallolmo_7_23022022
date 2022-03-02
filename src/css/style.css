@@ -1,0 +1,329 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css");
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@media (min-width: 1380px) {
+  body {
+    padding: 0 100px;
+  }
+}
+
+.main {
+  padding: 20px 10px;
+}
+
+.header {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+  height: 80px;
+  padding: 20px;
+}
+@media (min-width: 1380px) {
+  .header {
+    flex-direction: column;
+  }
+}
+.header__logo-container {
+  text-align: center;
+}
+.header__title {
+  font-family: "DM Sans", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #D04F4F;
+}
+@media (min-width: 1380px) {
+  .header__title {
+    font-size: 36px;
+  }
+}
+@media (min-width: 1380px) {
+  .header {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.search {
+  padding: 0 20px;
+}
+.search__input-container {
+  position: relative;
+}
+.search__input-icon {
+  position: absolute;
+  top: 26px;
+  left: 90%;
+}
+@media (min-width: 1380px) {
+  .search__input-icon {
+    left: 95%;
+  }
+}
+.search__input {
+  width: 100%;
+  box-sizing: border-box;
+  background: #E7E7E7;
+  border: none;
+  border-radius: 5px;
+  height: 70px;
+  padding: 24px 12px;
+  position: relative;
+}
+.search__buttons-wrapper {
+  border-radius: 5px;
+  margin-top: 25px;
+}
+@media (min-width: 1380px) {
+  .search__buttons-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+  }
+}
+.search__button-container {
+  position: relative;
+}
+@media (min-width: 1380px) {
+  .search__button-container {
+    display: inline-block;
+  }
+}
+.search__button {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 20px 0 20px 17px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  width: 170px;
+  margin-bottom: 12px;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+@media (min-width: 1380px) {
+  .search__button {
+    font-size: 18px;
+    width: 170px;
+  }
+}
+.search__button--blue-button {
+  background: #3282F7;
+}
+.search__button--green-button {
+  background: #68D9A4;
+}
+.search__button--red-button {
+  background: #D04F4F;
+}
+.search__dropdown-menu {
+  border-radius: 5px;
+  display: none;
+  position: absolute;
+  top: 0;
+  z-index: 999;
+  padding: 20px;
+}
+.search__dropdown-menu--blue {
+  background: #3282F7;
+  z-index: 800;
+}
+.search__dropdown-menu--green {
+  background: #68D9A4;
+  z-index: 600;
+}
+.search__dropdown-menu--red {
+  background: #D04F4F;
+  z-index: 400;
+}
+@media (min-width: 1380px) {
+  .search__dropdown-menu {
+    width: 667px;
+  }
+}
+.search__dropdown-menu-header {
+  display: flex;
+  column-gap: 16%;
+}
+.search__dropdown-menu-input {
+  background: transparent;
+  border: none;
+  width: 80%;
+  color: white;
+}
+.search__dropdown-menu-input:focus {
+  outline: none;
+}
+.search__dropdown-menu-input::placeholder {
+  color: #FFFFFF;
+  opacity: 0.5;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+}
+.search__dropdown-menu-input-icon {
+  color: white;
+  cursor: pointer;
+}
+.search__button-icon {
+  color: white;
+  position: absolute;
+  top: 25px;
+  left: 90%;
+}
+@media (min-width: 1380px) {
+  .search__button-icon {
+    left: 82%;
+  }
+}
+.search__dropdown-menu-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  color: white;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 20px;
+}
+.search__dropdown-menu-link {
+  width: 48%;
+}
+@media (min-width: 1380px) {
+  .search__dropdown-menu-link {
+    width: 26%;
+    font-size: 18px;
+  }
+}
+
+.recipes {
+  padding: 0 20px;
+}
+@media (min-width: 680px) {
+  .recipes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    column-gap: 2%;
+  }
+}
+.recipes__item {
+  margin-top: 25px;
+}
+@media (min-width: 680px) {
+  .recipes__item {
+    width: 49%;
+  }
+}
+@media (min-width: 1380px) {
+  .recipes__item {
+    width: 32%;
+  }
+}
+.recipes__item:nth-last-child(1) {
+  margin-bottom: 25px;
+}
+.recipes__image {
+  width: 100%;
+  margin-bottom: -3px;
+}
+.recipes__title-container {
+  background: #E7E7E7;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.recipes__title {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+.recipes__duration {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+}
+.recipes__ingredients-container {
+  background: #E7E7E7;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px 40px 20px;
+}
+.recipes__ingredients {
+  width: 45%;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+}
+.recipes__ingredient {
+  font-weight: bold;
+}
+.recipes__description {
+  width: 50%;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */
