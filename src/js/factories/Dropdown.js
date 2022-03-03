@@ -4,8 +4,8 @@ export class Dropdown {
         this.appliancesList = [];
         this.utensilsList = [];
         this.dropdownWrapperIngredients = document.getElementsByClassName('js-wrapper')[0];
-        this.$dropdownApplianceWrapper = document.getElementsByClassName('js-wrapper')[1];
-        this.$dropdownUtensilWrapper = document.getElementsByClassName('js-wrapper')[2];
+        this.dropdownApplianceWrapper = document.getElementsByClassName('js-wrapper')[1];
+        this.dropdownUtensilWrapper = document.getElementsByClassName('js-wrapper')[2];
         this.ingredientsButton = document.getElementById("ingredients");
         this.ingredientsListContainer = document.getElementById("ingredients-list");
         this.appliancesButton = document.getElementById("appliances");
@@ -47,7 +47,7 @@ export class Dropdown {
         recipes.forEach(recipe => {
             recipe.ingredients.forEach(ingredient => {
                 if(!this.ingredientsList.includes(ingredient.ingredient)){
-                    this.createIngredientsList(ingredient.ingredient)
+                    this.createListItem(ingredient.ingredient, this.dropdownWrapperIngredients);
                     this.ingredientsList.push(ingredient.ingredient);
                 }
             }) 
@@ -57,7 +57,7 @@ export class Dropdown {
     getAllAppliances(){
         recipes.forEach(recipe => {
             if(!this.appliancesList.includes(recipe.appliance)){
-                this.createAppliancesList(recipe.appliance)
+                this.createListItem(recipe.appliance, this.dropdownApplianceWrapper);
                     this.appliancesList.push(recipe.appliance);
             }
         })
@@ -67,34 +67,17 @@ export class Dropdown {
         recipes.forEach(recipe => {
             recipe.ustensils.forEach(ustensil => {
             if(!this.utensilsList.includes(ustensil)){
-                this.createUtensilsList(ustensil)
+                this.createListItem(ustensil, this.dropdownUtensilWrapper);
                 this.utensilsList.push(ustensil);
             }
         })
     })
     }
 
-    createIngredientsList(data) {
-        const $ingredient = document.createElement('li');
-        $ingredient.classList.add('search__dropdown-menu-link');
-        $ingredient.textContent = data;
-        
-        this.dropdownWrapperIngredients.appendChild($ingredient); 
-    }
-
-    createAppliancesList(data) {
-        const $appliance = document.createElement('li');
-        $appliance.classList.add('search__dropdown-menu-link');
-        $appliance.textContent = data;
-
-        this.$dropdownApplianceWrapper.appendChild($appliance); 
-    }
-
-    createUtensilsList(data) {
-        const $utensil = document.createElement('li');
-        $utensil.classList.add('search__dropdown-menu-link');
-        $utensil.textContent = data;
-
-        this.$dropdownUtensilWrapper.appendChild($utensil); 
+    createListItem(data, wrapper) {
+        const item = document.createElement('li');
+        item.classList.add('search__dropdown-menu-link');
+        item.textContent = data;
+        wrapper.appendChild(item); 
     }
 }

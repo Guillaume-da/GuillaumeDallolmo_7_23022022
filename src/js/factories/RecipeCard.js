@@ -1,14 +1,14 @@
 export class RecipeCard {
     constructor(recipe) {
         this._recipe = recipe;
-        this.$recipesWrapper = document.querySelector('.recipes');
+        this.recipesWrapper = document.querySelector('.recipes');
 
         this.displayAllRecipes();
     }
 
     createRecipeCard(data) {
-        const $article = document.createElement('article');
-        $article.classList.add('recipes__item');
+        const article = document.createElement('article');
+        article.classList.add('recipes__item');
         const recipeCard = `
                 <img src="src/img/recipe-img.svg" alt="recipe" class="recipes__image">
                 <div class="recipes__title-container">
@@ -26,13 +26,13 @@ export class RecipeCard {
                 </div>
         `;
         
-        $article.innerHTML = recipeCard;
-        return $article;
+        article.innerHTML = recipeCard;
+        return article;
     }
 
     displayAllRecipes() {
         recipes.forEach(recipe => {
-            this.$recipesWrapper.appendChild(this.createRecipeCard(recipe));
+            this.recipesWrapper.appendChild(this.createRecipeCard(recipe));
         })
     }
 
