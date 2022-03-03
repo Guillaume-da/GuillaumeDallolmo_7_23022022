@@ -96,12 +96,19 @@ table {
 }
 .search__input-icon {
   position: absolute;
-  top: 26px;
-  left: 90%;
+  top: 20px;
+  left: 86%;
+}
+@media (min-width: 680px) {
+  .search__input-icon {
+    left: 93%;
+    font-size: 25px;
+  }
 }
 @media (min-width: 1380px) {
   .search__input-icon {
-    left: 95%;
+    left: 96%;
+    font-size: 28px;
   }
 }
 .search__input {
@@ -110,9 +117,16 @@ table {
   background: #E7E7E7;
   border: none;
   border-radius: 5px;
+  font-family: "Lato";
+  font-size: 12px;
   height: 70px;
   padding: 24px 12px;
   position: relative;
+}
+@media (min-width: 1380px) {
+  .search__input {
+    font-size: 14px;
+  }
 }
 .search__buttons-wrapper {
   border-radius: 5px;
@@ -220,7 +234,12 @@ table {
   color: white;
   position: absolute;
   top: 25px;
-  left: 90%;
+  left: 87%;
+}
+@media (min-width: 680px) {
+  .search__button-icon {
+    left: 94%;
+  }
 }
 @media (min-width: 1380px) {
   .search__button-icon {
@@ -247,6 +266,10 @@ table {
     width: 26%;
     font-size: 18px;
   }
+}
+
+.fa-search:before {
+  font-size: 28px;
 }
 
 .recipes {
@@ -292,6 +315,10 @@ table {
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
 }
 .recipes__duration {
   font-family: Lato;
@@ -324,6 +351,11 @@ table {
   font-weight: normal;
   font-size: 12px;
   line-height: 100%;
+}
+@media (min-width: 1380px) {
+  .recipes__description {
+    font-size: 14px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

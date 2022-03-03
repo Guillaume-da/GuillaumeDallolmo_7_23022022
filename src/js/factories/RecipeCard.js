@@ -1,6 +1,5 @@
 export class RecipeCard {
-    constructor(recipe) {
-        this._recipe = recipe;
+    constructor() {
         this.recipesWrapper = document.querySelector('.recipes');
 
         this.displayAllRecipes();

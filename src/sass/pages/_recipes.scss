@@ -34,6 +34,10 @@
         font-weight: 400;
         font-size: 18px;
         line-height: 22px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 80%;
     }
     &__duration {
         font-family: Lato;
@@ -66,5 +70,8 @@
         font-weight: normal;
         font-size: 12px;
         line-height: 100%;
+        @include breakpoint-large {
+            font-size: 14px;
+        }
     }
 }

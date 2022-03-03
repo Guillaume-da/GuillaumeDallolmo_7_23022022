@@ -5,11 +5,16 @@
     }
     &__input-icon {
         position: absolute;
-        top: 26px;
-        left: 90%;
+        top: 20px;
+        left: 86%;
 
+        @include breakpoint-small {
+            left: 93%;
+            font-size: 25px;
+        }
         @include breakpoint-large {
-            left: 95%;
+            left: 96%;
+            font-size: 28px;
         }
     }
     &__input {
@@ -18,9 +23,14 @@
         background: #E7E7E7;
         border: none;
         border-radius: 5px;
+        font-family: 'Lato';
+        font-size: 12px;
         height: 70px;
         padding: 24px 12px;
         position: relative;
+        @include breakpoint-large {
+            font-size: 14px;
+        }
     }
     &__buttons-wrapper {
         border-radius: 5px;
@@ -124,7 +134,10 @@
         color: white;
         position: absolute;
         top: 25px;
-        left: 90%;
+        left: 87%;
+        @include breakpoint-small {
+            left: 94%;
+        }
         @include breakpoint-large {
             left: 82%;
         }
@@ -148,4 +161,8 @@
             font-size: 18px;
         }
     }
+}
+
+.fa-search:before {
+    font-size: 28px;
 }
