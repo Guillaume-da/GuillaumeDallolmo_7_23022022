@@ -12,9 +12,9 @@ export class Dropdown {
         this.appliancesListContainer = document.getElementById("appliances-list");
         this.utensilsButton = document.getElementById("utensils");
         this.utensilsListContainer = document.getElementById("utensils-list");
-        this.closeIngredients = document.getElementById('ingredients-close-icon');
-        this.closeAppliances = document.getElementById("appliances-close-icon");
-        this.closeUtensils = document.getElementById("utensils-close-icon");
+        this.closeIngredients = document.getElementsByClassName('js-close')[0];
+        this.closeAppliances = document.getElementsByClassName('js-close')[1];
+        this.closeUtensils = document.getElementsByClassName('js-close')[2];
 
         this.bindEvent();
         this.getAllIngredients();
