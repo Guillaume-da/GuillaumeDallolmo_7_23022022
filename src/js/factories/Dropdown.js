@@ -77,7 +77,7 @@ export class Dropdown {
     createListItem(data, wrapper) {
         const item = document.createElement('li');
         item.classList.add('search__dropdown-menu-link');
-        item.textContent = data;
+        item.textContent = data.charAt(0).toUpperCase() + data.slice(1);;
         wrapper.appendChild(item); 
     }
 }
