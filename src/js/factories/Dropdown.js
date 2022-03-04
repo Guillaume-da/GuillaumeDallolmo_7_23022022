@@ -22,9 +22,29 @@ export class Dropdown {
         this.getAllUtensils();
     }
 
+    closeOtherDroppdowns(firstContainer, firstButton, secondContainer, secondButton) {
+        firstContainer.style.display = 'none';
+        firstButton.style.width = '170px';
+        secondContainer.style.display = 'none';
+        secondButton.style.width = '170px';
+    }
+
     openDropdown(button, container) {
         button.addEventListener('click', ()=> {
             container.style.display = "block";
+
+            switch (button) {
+                case this.ingredientsButton:
+                    this.closeOtherDroppdowns(this.appliancesListContainer, this.appliancesButton, this.utensilsListContainer, this.utensilsButton);
+                break;
+                case this.appliancesButton:
+                    this.closeOtherDroppdowns(this.ingredientsListContainer, this.ingredientsButton, this.utensilsListContainer, this.utensilsButton);
+                break;
+                case this.utensilsButton:
+                    this.closeOtherDroppdowns(this.ingredientsListContainer, this.ingredientsButton, this.appliancesListContainer, this.appliancesButton);
+                break;
+            }
+
             if(screen.width >= 1380) {
                 button.style.width = "715px";
             }
@@ -36,12 +56,17 @@ export class Dropdown {
         button.addEventListener('click', ()=> {
             container.style.display = "none";
             if(screen.width >= 1380) {
-                if (container == this.ingredientsListContainer) {
-                    this.ingredientsButton.style.width = "170px";
-                } else if (container == this.appliancesListContainer){
-                    this.appliancesButton.style.width = "170px";
-                } else if (container == this.utensilsListContainer){
-                    this.utensilsButton.style.width = "170px";
+
+                switch (container) {
+                    case this.ingredientsListContainer:
+                        this.ingredientsButton.style.width = "170px";
+                    break;
+                    case this.appliancesListContainer:
+                        this.appliancesButton.style.width = "170px";
+                    break;
+                    case this.utensilsListContainer:
+                        this.utensilsButton.style.width = "170px";
+                    break;
                 }
             }
         })
