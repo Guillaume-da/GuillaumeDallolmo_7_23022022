@@ -22,7 +22,7 @@ export class Dropdown {
         this.getAllUtensils();
     }
 
-    closeOtherDroppdowns(firstContainer, firstButton, secondContainer, secondButton) {
+    closeOtherDropdowns(firstContainer, firstButton, secondContainer, secondButton) {
         firstContainer.style.display = 'none';
         firstButton.style.width = '170px';
         secondContainer.style.display = 'none';
@@ -33,18 +33,20 @@ export class Dropdown {
         button.addEventListener('click', ()=> {
             container.style.display = "block";
 
+            // Close other dropdowns when 1 opened
             switch (button) {
                 case this.ingredientsButton:
-                    this.closeOtherDroppdowns(this.appliancesListContainer, this.appliancesButton, this.utensilsListContainer, this.utensilsButton);
+                    this.closeOtherDropdowns(this.appliancesListContainer, this.appliancesButton, this.utensilsListContainer, this.utensilsButton);
                 break;
                 case this.appliancesButton:
-                    this.closeOtherDroppdowns(this.ingredientsListContainer, this.ingredientsButton, this.utensilsListContainer, this.utensilsButton);
+                    this.closeOtherDropdowns(this.ingredientsListContainer, this.ingredientsButton, this.utensilsListContainer, this.utensilsButton);
                 break;
                 case this.utensilsButton:
-                    this.closeOtherDroppdowns(this.ingredientsListContainer, this.ingredientsButton, this.appliancesListContainer, this.appliancesButton);
+                    this.closeOtherDropdowns(this.ingredientsListContainer, this.ingredientsButton, this.appliancesListContainer, this.appliancesButton);
                 break;
             }
 
+            // Allow to other buttons to be visible when dropdown opened
             if(screen.width >= 1380) {
                 button.style.width = "715px";
             }
@@ -57,6 +59,7 @@ export class Dropdown {
             container.style.display = "none";
             if(screen.width >= 1380) {
 
+                // Allow to back to initals width
                 switch (container) {
                     case this.ingredientsListContainer:
                         this.ingredientsButton.style.width = "170px";
@@ -72,6 +75,7 @@ export class Dropdown {
         })
     }
 
+    // Open / close dropdowns
     bindEvent(){
         this.openDropdown(this.ingredientsButton, this.ingredientsListContainer);   
         this.closeDropdown(this.closeIngredients, this.ingredientsListContainer);
@@ -112,9 +116,11 @@ export class Dropdown {
     })
     }
 
+    // Create an ingredient
     createListItem(data, wrapper) {
         const item = document.createElement('li');
         item.classList.add('search__dropdown-menu-link');
+        // Add uppercase to first letter
         item.textContent = data.charAt(0).toUpperCase() + data.slice(1);;
         wrapper.appendChild(item); 
     }
