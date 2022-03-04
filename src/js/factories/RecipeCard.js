@@ -12,12 +12,12 @@ export class RecipeCard {
                 <img src="src/img/recipe-img.svg" alt="recipe" class="recipes__image">
                 <div class="recipes__title-container">
                     <h2 class="recipes__title">${data.name}</h2>
-                    <span class="recipes__duration"><i class="fas fa-clock"></i> ${data.time}</span>
+                    <span class="recipes__duration"><i class="fas fa-clock"></i> ${data.time} min</span>
                 </div>
                 <div class="recipes__ingredients-container">
                     <ul class="recipes__ingredients">
                         ${data.ingredients.map(element => `
-                        <li>${element.ingredient}: ${element.quantity ? `${element.quantity}` : ''}${element.unit ? `${element.unit}` : ''}</li>
+                        <li><span class="recipes__ingredient">${element.ingredient}</span> ${element.quantity ? `: ${element.quantity}` : ''}${element.unit ? `${element.unit}` : ''}</li>
                         `).join('')}
                     </ul>
                     <p class="recipes__description">${data.description.slice(0, 210) + ' ...'}

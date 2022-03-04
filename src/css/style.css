@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700;900&family=Roboto&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css");
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
@@ -117,7 +117,7 @@ table {
   background: #E7E7E7;
   border: none;
   border-radius: 5px;
-  font-family: "Lato";
+  font-family: "Lato", sans-serif;
   font-size: 12px;
   height: 70px;
   padding: 24px 12px;
@@ -152,7 +152,7 @@ table {
   border-radius: 5px;
   color: white;
   padding: 20px 0 20px 17px;
-  font-family: Lato;
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -220,7 +220,7 @@ table {
 .search__dropdown-menu-input::placeholder {
   color: #FFFFFF;
   opacity: 0.5;
-  font-family: Lato;
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -251,7 +251,7 @@ table {
   justify-content: space-between;
   flex-wrap: wrap;
   color: white;
-  font-family: Lato;
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -270,6 +270,22 @@ table {
 
 .fa-search:before {
   font-size: 28px;
+}
+
+.tags {
+  margin-top: 30px;
+}
+.tags__item {
+  background: #3282F7;
+  border-radius: 5px;
+  color: white;
+  font-family: "Lato";
+  font-size: 14px;
+  padding: 10px 15px;
+  width: 107px;
+}
+.tags__icon {
+  margin-left: 13px;
 }
 
 .recipes {
@@ -310,7 +326,7 @@ table {
   padding: 20px;
 }
 .recipes__title {
-  font-family: Lato;
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -321,7 +337,7 @@ table {
   width: 80%;
 }
 .recipes__duration {
-  font-family: Lato;
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -333,20 +349,21 @@ table {
   justify-content: space-between;
   padding: 0 20px 40px 20px;
 }
+.recipes__ingredient {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+}
 .recipes__ingredients {
   width: 45%;
-  font-family: Lato;
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
   line-height: 14px;
 }
-.recipes__ingredient {
-  font-weight: bold;
-}
 .recipes__description {
   width: 50%;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;

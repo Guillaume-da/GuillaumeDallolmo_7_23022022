@@ -23,7 +23,7 @@
         background: #E7E7E7;
         border: none;
         border-radius: 5px;
-        font-family: 'Lato';
+        font-family: 'Lato', sans-serif;
         font-size: 12px;
         height: 70px;
         padding: 24px 12px;
@@ -54,7 +54,7 @@
         border-radius: 5px;
         color: white;
         padding: 20px 0 20px 17px;
-        font-family: Lato;
+        font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: bold;
         font-size: 16px;
@@ -118,7 +118,7 @@
     &__dropdown-menu-input::placeholder {
         color: #FFFFFF;
         opacity: 0.5;
-        font-family: Lato;
+        font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: bold;
         font-size: 18px;
@@ -147,7 +147,7 @@
         justify-content: space-between;
         flex-wrap: wrap;
         color: white;
-        font-family: Lato;
+        font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 18px;

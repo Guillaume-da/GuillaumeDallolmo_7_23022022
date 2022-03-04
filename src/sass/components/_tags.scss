@@ -1,0 +1,15 @@
+.tags {
+    margin-top: 30px;
+    &__item {
+        background: $blue;
+        border-radius: 5px;
+        color: white;
+        font-family: 'Lato';
+        font-size: 14px;
+        padding: 10px 15px;
+        width: 107px;
+    }
+    &__icon {
+        margin-left: 13px;
+    }
+}

@@ -29,7 +29,7 @@
         padding: 20px;
     }
     &__title {
-        font-family: Lato;
+        font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
@@ -40,7 +40,7 @@
         width: 80%;
     }
     &__duration {
-        font-family: Lato;
+        font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: 700;
         font-size: 18px;
@@ -52,20 +52,21 @@
         justify-content: space-between;
         padding: 0 20px 40px 20px;
     }
+    &__ingredient {
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+    }
     &__ingredients {
         width: 45%;
-        font-family: Lato;
+        font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: bold;
         font-size: 12px;
         line-height: 14px;
     }
-    &__ingredient {
-        font-weight: bold;
-    }
     &__description {
         width: 50%;
-        font-family: Roboto;
+        font-family: 'Roboto', sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 12px;
