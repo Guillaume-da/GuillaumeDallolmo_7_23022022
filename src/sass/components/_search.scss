@@ -104,7 +104,10 @@
     }
     &__dropdown-menu-header {
         display: flex;
-        column-gap: 16%;
+        column-gap: 10.5%;
+        @include breakpoint-large {
+            column-gap: 16%;
+        }
     }
     &__dropdown-menu-input {
         background: transparent;

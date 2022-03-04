@@ -206,7 +206,12 @@ table {
 }
 .search__dropdown-menu-header {
   display: flex;
-  column-gap: 16%;
+  column-gap: 10.5%;
+}
+@media (min-width: 1380px) {
+  .search__dropdown-menu-header {
+    column-gap: 16%;
+  }
 }
 .search__dropdown-menu-input {
   background: transparent;
