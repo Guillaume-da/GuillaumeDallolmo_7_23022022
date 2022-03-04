@@ -33,19 +33,20 @@ export class Dropdown {
         button.addEventListener('click', ()=> {
             container.style.display = "block";
 
+            if(screen.width >= 1380) {
             // Close other dropdowns when 1 opened
-            switch (button) {
-                case this.ingredientsButton:
-                    this.closeOtherDropdowns(this.appliancesListContainer, this.appliancesButton, this.utensilsListContainer, this.utensilsButton);
-                break;
-                case this.appliancesButton:
-                    this.closeOtherDropdowns(this.ingredientsListContainer, this.ingredientsButton, this.utensilsListContainer, this.utensilsButton);
-                break;
-                case this.utensilsButton:
-                    this.closeOtherDropdowns(this.ingredientsListContainer, this.ingredientsButton, this.appliancesListContainer, this.appliancesButton);
-                break;
+                switch (button) {
+                    case this.ingredientsButton:
+                        this.closeOtherDropdowns(this.appliancesListContainer, this.appliancesButton, this.utensilsListContainer, this.utensilsButton);
+                    break;
+                    case this.appliancesButton:
+                        this.closeOtherDropdowns(this.ingredientsListContainer, this.ingredientsButton, this.utensilsListContainer, this.utensilsButton);
+                    break;
+                    case this.utensilsButton:
+                        this.closeOtherDropdowns(this.ingredientsListContainer, this.ingredientsButton, this.appliancesListContainer, this.appliancesButton);
+                    break;
             }
-
+            }   
             // Allow to other buttons to be visible when dropdown opened
             if(screen.width >= 1380) {
                 button.style.width = "715px";
