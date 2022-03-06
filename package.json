@@ -5,7 +5,8 @@
   "main": "",
   "scripts": {
     "sass": "sass --watch ./src/sass/main.scss:./src/css/style.css",
-    "prefix": "postcss ./src/css/style.css --use autoprefixer -d ./src/css/prefixed/"
+    "prefix": "postcss ./src/css/style.css --use autoprefixer -d ./src/css/prefixed/",
+    "lint": "eslint ./"
   },
   "author": "",
   "license": "ISC",
@@ -13,7 +14,8 @@
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0",
-    "sass": "^1.45.1"
+    "sass": "^1.45.1",
+    "eslint": "^8.8.0"
   },
   "browserslist": "last 2 versions"
 }

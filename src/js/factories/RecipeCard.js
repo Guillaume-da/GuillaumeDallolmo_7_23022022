@@ -1,14 +1,14 @@
 export class RecipeCard {
-    constructor() {
-        this.recipesWrapper = document.querySelector('.recipes');
+	constructor() {
+		this.recipesWrapper = document.querySelector('.recipes');
 
-        this.displayAllRecipes();
-    }
+		this.displayAllRecipes();
+	}
 
-    createRecipeCard(data) {
-        const article = document.createElement('article');
-        article.classList.add('recipes__item');
-        const recipeCard = `
+	createRecipeCard(data) {
+		const article = document.createElement('article');
+		article.classList.add('recipes__item');
+		const recipeCard = `
                 <img src="src/img/recipe-img.svg" alt="recipe" class="recipes__image">
                 <div class="recipes__title-container">
                     <h2 class="recipes__title">${data.name}</h2>
@@ -25,15 +25,14 @@ export class RecipeCard {
                 </div>
         `;
         
-        article.innerHTML = recipeCard;
-        return article;
-    }
+		article.innerHTML = recipeCard;
+		return article;
+	}
 
-    displayAllRecipes() {
-        recipes.forEach(recipe => {
-            this.recipesWrapper.appendChild(this.createRecipeCard(recipe));
-        })
-    }
-
-    
+	displayAllRecipes() {
+		// eslint-disable-next-line no-undef
+		recipes.forEach(recipe => {
+			this.recipesWrapper.appendChild(this.createRecipeCard(recipe));
+		});
+	} 
 }

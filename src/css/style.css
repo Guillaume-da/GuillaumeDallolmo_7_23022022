@@ -268,6 +268,7 @@ table {
 }
 @media (min-width: 1380px) {
   .search__dropdown-menu-link {
+    cursor: pointer;
     width: 26%;
     font-size: 18px;
   }
@@ -279,6 +280,9 @@ table {
 
 .tags {
   margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 .tags__item {
   background: #3282F7;
@@ -286,11 +290,23 @@ table {
   color: white;
   font-family: "Lato";
   font-size: 14px;
-  padding: 10px 15px;
-  width: 107px;
+  padding: 15px 25px;
+}
+.tags__item--blue {
+  background: #3282F7;
+}
+.tags__item--green {
+  background: #68D9A4;
+}
+.tags__item--red {
+  background: #D04F4F;
 }
 .tags__icon {
+  font-size: 20px;
   margin-left: 13px;
+  cursor: pointer;
+  position: relative;
+  top: 2px;
 }
 
 .recipes {

@@ -160,6 +160,7 @@
     &__dropdown-menu-link {
         width: 48%;
         @include breakpoint-large {
+            cursor: pointer;
             width: 26%;
             font-size: 18px;
         }
