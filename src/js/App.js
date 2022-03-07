@@ -6,7 +6,7 @@ class App {
 	main() {
 		new Dropdown();  
 		new RecipeCard(); 
-		new Tag(); 
+		new Tag();
 	}
 }
 
