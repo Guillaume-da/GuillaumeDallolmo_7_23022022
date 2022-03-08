@@ -1,12 +1,13 @@
+/* eslint-disable no-undef */
 import {Dropdown} from './factories/Dropdown.js';
 import {RecipeCard} from './factories/RecipeCard.js';
-import { Tag } from './factories/Tag.js';
+import { Search } from './Search.js';
 
 class App {
 	main() {
-		new Dropdown();  
-		new RecipeCard(); 
-		new Tag();
+		new Dropdown(recipes);  
+		new RecipeCard(recipes); 
+		new Search();
 	}
 }
 

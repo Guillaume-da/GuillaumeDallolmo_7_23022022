@@ -1,7 +1,13 @@
 /* eslint-disable no-undef */
+
+import { Tag } from './Tag.js';
+
 export class Dropdown {
-	constructor() {
+	constructor(recipes) {
 		this.ingredientsList = [];
+		this.ingredientsListUpdated = [];
+		this.appliancesListUpdated = [];
+		this.utensilsListUpdated = [];
 		this.appliancesList = [];
 		this.utensilsList = [];
 		this.ingredientsDropdownWrapper = document.getElementsByClassName('js-wrapper')[0];
@@ -19,11 +25,17 @@ export class Dropdown {
 		this.ingredientItem = 'js-ingredient';
 		this.applianceItem = 'js-appliance';
 		this.utensilItem = 'js-utensil';
+		this.ingredientsInput = document.getElementsByClassName('search__dropdown-menu-input')[0];
+		this.appliancesInput = document.getElementsByClassName('search__dropdown-menu-input')[1];
+		this.utensilsInput = document.getElementsByClassName('search__dropdown-menu-input')[2];
+		this.ingredientsContainer = document.getElementsByClassName('search__dropdown-menu-list')[0];
+		this.appliancesContainer = document.getElementsByClassName('search__dropdown-menu-list')[1];
+		this.utensilsContainer = document.getElementsByClassName('search__dropdown-menu-list')[2];
 
 		this.bindEvent();
-		this.getAllIngredients();
-		this.getAllAppliances();
-		this.getAllUtensils();
+		this.getAllIngredients(recipes);
+		this.getAllAppliances(recipes);
+		this.getAllUtensils(recipes);
 	}
 
 	closeOtherDropdowns(firstContainer, firstButton, secondContainer, secondButton) {
@@ -80,6 +92,38 @@ export class Dropdown {
 		});
 	}
 
+	clearList(container) {
+		while (container.firstChild) {
+			container.removeChild(container.firstChild);
+		}
+	}
+
+	updateDropdownListWhenInput(input, updatedList, container, list) {
+		input.addEventListener('input', (e)=> {
+			updatedList = [];
+			this.clearList(container);
+			list.forEach(item => {
+				if(!updatedList.includes(item)) {
+					if(item.toLowerCase().includes(e.target.value.toLowerCase())) {
+						switch (input) {
+						case this.ingredientsInput:
+							this.createListItem(item, this.ingredientItem, this.ingredientsDropdownWrapper);
+							break;
+						case this.appliancesInput:
+							this.createListItem(item, this.applianceItem, this.dropdownApplianceWrapper);
+							break;
+						case this.utensilsInput:
+							this.createListItem(item, this.utensilItem, this.dropdownUtensilWrapper);
+							break;
+						}
+						updatedList.push(item);
+					}
+				}
+			});
+			new Tag();
+		});
+	}
+
 	// Open / close dropdowns
 	bindEvent(){
 		this.openDropdown(this.ingredientsButton, this.ingredientsListContainer);   
@@ -88,9 +132,48 @@ export class Dropdown {
 		this.closeDropdown(this.closeAppliances, this.appliancesListContainer);
 		this.openDropdown(this.utensilsButton, this.utensilsListContainer);
 		this.closeDropdown(this.closeUtensils, this.utensilsListContainer);
+		this.updateDropdownListWhenInput(this.ingredientsInput, this.ingredientsListUpdated, this.ingredientsContainer, this.ingredientsList);
+		this.updateDropdownListWhenInput(this.appliancesInput, this.appliancesListUpdated, this.appliancesContainer, this.appliancesList);
+		this.updateDropdownListWhenInput(this.utensilsInput, this.utensilsListUpdated, this.utensilsContainer, this.utensilsList);
+		/* this.ingredientsInput.addEventListener('input', (e)=> {
+			this.ingredientsListUpdated = [];
+			this.clearList(this.ingredientsContainer);
+			this.ingredientsList.forEach(ingredient => {
+				if(!this.ingredientsListUpdated.includes(ingredient)) {
+					if(ingredient.toLowerCase().includes(e.target.value.toLowerCase())) {
+						this.createListItem(ingredient, this.ingredientItem, this.ingredientsDropdownWrapper);
+						this.ingredientsListUpdated.push(ingredient);
+					}
+				}
+			});
+		});
+		this.appliancesInput.addEventListener('input', (e)=> {
+			this.appliancesListUpdated = [];
+			this.clearList(this.appliancesContainer);
+			this.appliancesList.forEach(appliance => {
+				if(!this.appliancesListUpdated.includes(appliance)) {
+					if(appliance.toLowerCase().includes(e.target.value.toLowerCase())) {
+						this.createListItem(appliance, this.applianceItem, this.dropdownApplianceWrapper);
+						this.appliancesListUpdated.push(appliance);
+					}
+				}
+			});
+		});
+		this.utensilsInput.addEventListener('input', (e)=> {
+			this.utensilsListUpdated = [];
+			this.clearList(this.utensilsContainer);
+			this.utensilsList.forEach(utensil => {
+				if(!this.utensilsListUpdated.includes(utensil)) {
+					if(utensil.toLowerCase().includes(e.target.value.toLowerCase())) {
+						this.createListItem(utensil, this.utensilItem, this.dropdownUtensilWrapper);
+						this.utensilsListUpdated.push(utensil);
+					}
+				}
+			});
+		}); */
 	}
 
-	getAllIngredients(){
+	getAllIngredients(recipes){
 		recipes.forEach(recipe => {
 			recipe.ingredients.forEach(ingredient => {
 				if(!this.ingredientsList.includes(ingredient.ingredient)){
@@ -101,7 +184,7 @@ export class Dropdown {
 		});
 	}
 
-	getAllAppliances(){
+	getAllAppliances(recipes){
 		recipes.forEach(recipe => {
 			if(!this.appliancesList.includes(recipe.appliance)){
 				this.createListItem(recipe.appliance, this.applianceItem, this.dropdownApplianceWrapper);
@@ -110,7 +193,7 @@ export class Dropdown {
 		});
 	}
 
-	getAllUtensils(){
+	getAllUtensils(recipes){
 		recipes.forEach(recipe => {
 			recipe.ustensils.forEach(ustensil => {
 				if(!this.utensilsList.includes(ustensil)){
