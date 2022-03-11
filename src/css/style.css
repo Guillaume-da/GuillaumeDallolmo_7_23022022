@@ -278,6 +278,22 @@ table {
   font-size: 28px;
 }
 
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.small-size {
+  width: 170px;
+}
+
+.large-size {
+  width: 715px;
+}
+
 .tags {
   margin-top: 30px;
   display: flex;
@@ -355,7 +371,7 @@ table {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 80%;
+  width: 67%;
 }
 .recipes__duration {
   font-family: "Lato", sans-serif;

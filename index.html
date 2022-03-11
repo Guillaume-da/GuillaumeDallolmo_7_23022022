@@ -22,35 +22,34 @@
             <div class="tags"></div>
             <div class="search__buttons-wrapper">
                 <div class="search__button-container">
-                    <button class="search__button search__button--blue-button" id="ingredients">Ingrédients</button>
+                    <button class="search__button search__button--blue-button js-openDropdown" data-filter="ingredients" id="ingredients">Ingrédients</button>
                     
                     <div class="search__button-icon"><span class="fas fa-chevron-down"></span></div>
-                    <div class="search__dropdown-menu search__dropdown-menu--blue" id="ingredients-list">
+                    <div class="search__dropdown-menu search__dropdown-menu--blue js-showDropdownList" id="ingredients-list">
                         <div class="search__dropdown-menu-header">
-                            <input type="text" placeholder="Rechercher un ingrédient"
-                                class="search__dropdown-menu-input">
+                            <input type="text" placeholder="Rechercher un ingrédient" class="search__dropdown-menu-input js-input">
                             <span class="fas fa-chevron-up search__dropdown-menu-input-icon js-close"></span>
                         </div>
                         <ul class="search__dropdown-menu-list js-wrapper"></ul>
                     </div>
                 </div>
                 <div class="search__button-container">
-                    <button class="search__button search__button--green-button" id="appliances">Appareils</button>
+                    <button class="search__button search__button--green-button js-openDropdown " data-filter="appliances" id="appliances">Appareils</button>
                     <div class=" search__button-icon"><span class="fas fa-chevron-down"></span></div>
-                        <div class="search__dropdown-menu search__dropdown-menu--green" id="appliances-list">
+                        <div class="search__dropdown-menu search__dropdown-menu--green js-showDropdownList" id="appliances-list">
                             <div class="search__dropdown-menu-header">
-                                <input type="text" placeholder="Rechercher un appareil" class="search__dropdown-menu-input">
+                                <input type="text" placeholder="Rechercher un appareil" class="search__dropdown-menu-input js-input">
                                 <span class="fas fa-chevron-up search__dropdown-menu-input-icon js-close"></span>
                             </div>
                             <ul class="search__dropdown-menu-list js-wrapper"></ul>
                         </div>
                 </div>
                 <div class="search__button-container">
-                    <button class="search__button search__button--red-button" id="utensils">Ustensiles</button>
+                    <button class="search__button search__button--red-button js-openDropdown" data-filter="utensils" id="utensils">Ustensiles</button>
                     <div class=" search__button-icon"><span class="fas fa-chevron-down"></span></div>
-                    <div class="search__dropdown-menu search__dropdown-menu--red" id="utensils-list">
+                    <div class="search__dropdown-menu search__dropdown-menu--red js-showDropdownList" id="utensils-list">
                         <div class="search__dropdown-menu-header">
-                            <input type="text" placeholder="Rechercher un ustensile" class="search__dropdown-menu-input">
+                            <input type="text" placeholder="Rechercher un ustensile" class="search__dropdown-menu-input js-input">
                             <span class="fas fa-chevron-up search__dropdown-menu-input-icon js-close"></span>
                         </div>
                         <ul class="search__dropdown-menu-list js-wrapper"></ul>
