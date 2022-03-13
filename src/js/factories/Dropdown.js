@@ -14,12 +14,17 @@ export class Dropdown {
 		this.closeButtons = document.getElementsByClassName('js-close');
 		this.inputs = document.getElementsByClassName('js-input');
 		this.dropdownsLists = document.getElementsByClassName('js-showDropdownList');
+		this.listContainers = document.getElementsByClassName('js-wrapper');
+
+		this.getListDatas(recipes);
 
 		this.openDropdown = (e) => this._openDropdown(e);
 		this.closeDropdown = (e) => this._closeDropdown(e);
 		this.updateDropdownListWhenInput = (e) => this._updateDropdownListWhenInput(e);
 
 		this.bindEvent();
+
+		new Tag();
 	}
 
 	// Create list item
@@ -31,6 +36,42 @@ export class Dropdown {
 		item.textContent = data.charAt(0).toUpperCase() + data.slice(1);
 		wrapper.appendChild(item); 
 	}
+
+	isValidItem(list, listWrapper, item) {
+		if(!list.includes(item)){
+			list.push(item);
+			this.createListItem(item, listWrapper);
+		}
+	}
+
+	getListDatas(recipes) {
+		for(let listContainer of this.listContainers) {
+			const listWrapper = listContainer.parentElement.lastChild.previousSibling;
+			const button = listContainer.parentElement.parentElement.firstChild.nextSibling.dataset.filter;
+			switch (button) {
+			case 'ingredients':
+				recipes.forEach(recipe => {
+					recipe.ingredients.forEach(ingredient => {
+						this.isValidItem(this.ingredientsList, listWrapper, ingredient.ingredient);
+					});
+				});
+				break;
+			case 'appliances':
+				recipes.forEach(recipe => {
+					this.isValidItem(this.appliancesList, listWrapper, recipe.appliance);
+				});
+				break;
+			case 'utensils':
+				recipes.forEach(recipe => {
+					recipe.ustensils.forEach(ustensil => {
+						this.isValidItem(this.utensilsList, listWrapper, ustensil);
+					});
+				});
+				break;
+			}
+		}
+	}
+
 
 	_openDropdown(e) {
 		let dropdownList = e.target.parentElement.getElementsByClassName('js-showDropdownList')[0];
@@ -45,41 +86,11 @@ export class Dropdown {
 		}
 		dropdownList.classList.remove('hide');
 		dropdownList.classList.add('show');
-		if(e.target.dataset.filter === 'ingredients') {
-			recipes.forEach(recipe => {
-				recipe.ingredients.forEach(ingredient => {
-					const listContainer = e.target.parentElement.lastChild.previousElementSibling.lastChild.previousElementSibling;
-					if(!this.ingredientsList.includes(ingredient.ingredient)){
-						this.createListItem(ingredient.ingredient, listContainer);
-						this.ingredientsList.push(ingredient.ingredient);
-					}
-				}); 
-			});
-		} else if (e.target.dataset.filter === 'appliances') {
-			recipes.forEach(recipe => {
-				const listContainer = e.target.parentElement.lastChild.previousElementSibling.lastChild.previousElementSibling;
-				if(!this.appliancesList.includes(recipe.appliance)){
-					this.createListItem(recipe.appliance, listContainer);
-					this.appliancesList.push(recipe.appliance);
-				}
-			});
-		} else if (e.target.dataset.filter === 'utensils') {
-			recipes.forEach(recipe => {
-				const listContainer = e.target.parentElement.lastChild.previousElementSibling.lastChild.previousElementSibling;
-				recipe.ustensils.forEach(ustensil => {
-					if(!this.utensilsList.includes(ustensil)){
-						this.createListItem(ustensil, listContainer);
-						this.utensilsList.push(ustensil);
-					}
-				});
-			});
-		}
 
 		// Allow to other buttons to be visible when dropdown opened
 		if(screen.width >= 1380) {
 			dropdownList.parentElement.classList.add('large-size');
-		}
-		new Tag();
+		}	
 	}
 
 	_closeDropdown(e) {
@@ -90,6 +101,9 @@ export class Dropdown {
 		dropdownList.parentElement.classList.add('hide');
 		if(screen.width >= 1380) {
 			dropdownList.parentElement.parentElement.classList.remove('large-size');
+			if(dropdownList.parentElement.parentElement.classList.contains('list-medium-size')){
+				dropdownList.parentElement.parentElement.classList.remove('list-medium-size');
+			}
 		}
 	}
 
@@ -100,6 +114,23 @@ export class Dropdown {
 	}
 
 	_updateDropdownListWhenInput(e) {
+		/* let results =  this.ingredientsList.filter((ingredient) => {
+			return ingredient.includes(e.target.value);
+		});
+		console.log(results);
+		if (typeof(e) !== 'undefined') {
+			this.clearList(e.target.parentElement.parentElement.lastChild.previousElementSibling);
+		}
+		const listContainer = document.getElementsByClassName('js-wrapper')[0];
+		for(let result of results) {
+			const item = document.createElement('li');
+			item.classList.add('search__dropdown-menu-link');
+
+			// Add uppercase to first letter
+			item.textContent = result;
+			listContainer.appendChild(item);
+		} */
+		
 		this.updatedList = [];
 		let listItems = e.target.parentElement.nextSibling.nextSibling.getElementsByClassName('search__dropdown-menu-link');
 		for(let item of listItems){
@@ -123,7 +154,33 @@ export class Dropdown {
 				}
 			}
 		}
-		
+
+		if(this.updatedList.length === 2) {
+			let links = e.target.parentElement.nextSibling.nextElementSibling.getElementsByClassName('search__dropdown-menu-link');
+			e.target.parentElement.parentElement.classList.add('medium-size');
+			for(let link of links){
+				link.classList.add('half-size');	
+			}
+			let button = e.target.parentElement.parentElement.parentElement;
+			if(button.classList.contains('large-size')){
+				button.classList.remove('large-size');
+			}
+			button.classList.add('list-medium-size');
+
+		} else if(this.updatedList.length > 2) {
+			let links = e.target.parentElement.nextSibling.nextElementSibling.getElementsByClassName('search__dropdown-menu-link');
+			for(let link of links){
+				if(link.classList.contains('half-size'))
+					link.classList.remove('half-size');	
+			}
+			let button = e.target.parentElement.parentElement.parentElement;
+			if(button.classList.contains('list-medium-size')){
+				button.classList.remove('list-medium-size');
+				button.classList.add('large-size');
+				e.target.parentElement.parentElement.classList.remove('medium-size');
+				e.target.parentElement.parentElement.classList.add('list-large-size');
+			}
+		}
 		new Tag();
 	}
 
