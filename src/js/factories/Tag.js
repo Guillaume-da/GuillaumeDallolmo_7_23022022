@@ -1,46 +1,44 @@
-/* eslint-disable indent */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+
 export class Tag {
 	constructor(){
 		this.tagsContainer = document.getElementsByClassName('tags')[0];
 		this.items = document.getElementsByClassName('search__dropdown-menu-link');
-		this.itemsArray = Array.prototype.slice.call( this.items, 0 );
-        this.tagsIcons = document.getElementsByClassName('tags__icon');
-        this.tagsIconsArray = Array.prototype.slice.call( this.tagsIcons, 0 );
+		this.tagsIcons = document.getElementsByClassName('tags__icon');
 		
-        this.getItemClicked();
+		this.getItemClicked = (e) => this._getItemClicked(e);
+		this.closeItem = (e) => this._closeItem(e);
+		
+		this.bindEvent();
 	}
 
-	getItemClicked(){
-        for(const element of this.itemsArray) {
-            element.addEventListener('click', ()=> {
-                if (element.classList.contains('js-ingredient')){
-                    this.displayTag(element.textContent, 'tags__item--blue');
-                } else if (element.classList.contains('js-appliance')){
-                    this.displayTag(element.textContent, 'tags__item--green');
-                } else if (element.classList.contains('js-utensil')) {
-                    this.displayTag(element.textContent, 'tags__item--red');
-                } 
-			});
-        }
-	}
-
-	displayTag(tag, colorClass){
+	displayTag(tag, color){
 		const span = document.createElement('span');
 		span.classList.add('tags__item');
-        span.classList.add(colorClass);
+		span.style.backgroundColor = color;
 		span.innerHTML = `${tag} <i class="far fa-times-circle tags__icon"></i>`;
 		this.tagsContainer.appendChild(span);
-        this.closeItem();
-	}   
+		this.bindEvent();
+	} 
 
-    closeItem() {
-        let array = Array.prototype.slice.call( this.tagsIcons, 0 );
-        array.forEach(element => {
-            element.addEventListener('click', ()=> {
-                element.parentNode.style.display = 'none';
-            });
-        });
-    }
+	_getItemClicked(e) {
+		let item = e.target;
+		let backgroundColor = window.getComputedStyle(item.parentElement.parentElement).backgroundColor;
+		this.displayTag(item.textContent, backgroundColor);
+	}
+
+	_closeItem(e) {
+		let item = e.target;
+		item.parentElement.classList.add('hide');
+	}
+
+	bindEvent(){
+		for(const element of this.items) {
+			element.addEventListener('click', this.getItemClicked);
+		}
+		for(const icon of this.tagsIcons) {
+			icon.addEventListener('click', this.closeItem);
+		}
+	} 
 }
