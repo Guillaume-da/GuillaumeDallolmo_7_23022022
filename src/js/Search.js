@@ -21,15 +21,15 @@ export class Search {
 		this.bindEvent();
 	}
 	
-	/* getDatas(datas, tag) {
-		datas.forEach(recipe => {
-			if(!this.newResultArray.includes(recipe)) {
-				if(recipe.name.toLowerCase().includes(tag) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(tag)) || recipe.description.toLowerCase().includes(tag)){
-					this.newResultArray.push(recipe);
+	getDatas(datas, tag, array) {
+		datas.filter(recipe => {
+			if(recipe.name.toLowerCase().includes(tag.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) || recipe.description.toLowerCase().includes(tag.toLowerCase())){
+				if(!array.includes(recipe)) {
+					array.push(recipe);
 				}
 			}
 		});
-	} */
+	}
 
 	getResultByTag(tag) {
 		let searchResult = JSON.parse(localStorage.getItem('this.resultArray'));
@@ -41,21 +41,23 @@ export class Search {
 		
 		if(result === null){
 			console.log('true');
-			recipes.forEach(recipe => {
-				if(recipe.name.toLowerCase().includes(tag.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(tag.toLowerCase())) || recipe.description.toLowerCase().includes(tag.toLowerCase())){
+			this.getDatas(recipes, tag, this.newResultArray);
+			/* recipes.forEach(recipe => {
+				if(recipe.name.toLowerCase().includes(tag.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) || recipe.description.toLowerCase().includes(tag.toLowerCase())){
 					if(!this.newResultArray.includes(recipe)) {
 						this.newResultArray.push(recipe);
 					}
 				}
-			});
+			}); */
 		} else {
-			result.forEach(recipe => {
-				if(recipe.name.toLowerCase().includes(tag.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(tag.toLowerCase())) || recipe.description.toLowerCase().includes(tag.toLowerCase())){
+			this.getDatas(result, tag, this.newResultArray);
+			/* result.forEach(recipe => {
+				if(recipe.name.toLowerCase().includes(tag.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) || recipe.description.toLowerCase().includes(tag.toLowerCase())){
 					if(!this.newResultArray.includes(recipe)) {
 						this.newResultArray.push(recipe);
 					}
 				}
-			});
+			}); */
 		}
 		
 		console.log(this.newResultArray);
@@ -68,18 +70,23 @@ export class Search {
 	}
 	
 
-	_getResult(e) {
-		localStorage.clear();
+	_getResult(e) {	
+		if(e.target.value.length === 0) {
+			localStorage.clear();
+		}
 		if(e.target.value.length >= 3) {
+			localStorage.clear();
 			this.resultArray = [];
-			recipes.forEach(recipe => {
-				if(!this.resultArray.includes(recipe)) {
-					if(recipe.name.toLowerCase().includes(e.target.value) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(e.target.value)) || recipe.description.toLowerCase().includes(e.target.value)){
+			this.getDatas(recipes, e.target.value, this.resultArray);
+			/* recipes.forEach(recipe => {
+				if(recipe.name.toLowerCase().includes(e.target.value) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(e.target.value)) || recipe.description.toLowerCase().includes(e.target.value)){
+					if(!this.resultArray.includes(recipe)) {
 						this.resultArray.push(recipe);
-						localStorage.setItem('resultArray', JSON.stringify(this.resultArray));
+						
 					}
 				}
-			});
+			}); */
+			localStorage.setItem('resultArray', JSON.stringify(this.resultArray));
 			this.clearCardsAndDropdowns();
 			new RecipeCard(this.resultArray);
 			new Dropdown(this.resultArray);
@@ -92,7 +99,7 @@ export class Search {
 		
 		let result = localStorage.getItem('resultArray');
 		result = JSON.parse(result);
-		console.log('result', result);
+		// console.log('result', result);
 	}
 
 	clearList(wrapper) {

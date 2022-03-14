@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 import { Tag } from './Tag.js';
-import { Search } from '../Search.js';
+// import { Search } from '../Search.js';
 
 export class Dropdown {
 	// eslint-disable-next-line no-unused-vars
@@ -150,12 +150,15 @@ export class Dropdown {
 		// Check if target value matchs with an item
 		// If match, create item and put item in this.updatedList
 		for(let item of this.list){
+			console.log(e.target.value);
 			if(item.toLowerCase().includes(e.target.value)){
 				if(!this.updatedList.includes(item.toLowerCase())) {
 					this.updatedList.push(item.toLowerCase());
 					const link = document.createElement('li');
 					link.classList.add('search__dropdown-menu-link');
 					link.textContent = item.toLowerCase();
+					console.log(this.updatedList);
+					console.log(e.target.parentElement.nextSibling.nextSibling);
 					e.target.parentElement.nextSibling.nextSibling.appendChild(link); 
 				}
 			}
@@ -188,7 +191,7 @@ export class Dropdown {
 			}
 		} */
 		new Tag();
-		new Search().getResult(e);
+		// new Search().getResult(e);
 	}
 
 	bindEvent(){
