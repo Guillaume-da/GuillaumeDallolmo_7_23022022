@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 
 import { Tag } from './Tag.js';
+import { Search } from '../Search.js';
 
 export class Dropdown {
 	// eslint-disable-next-line no-unused-vars
@@ -130,7 +131,9 @@ export class Dropdown {
 			item.textContent = result;
 			listContainer.appendChild(item);
 		} */
+
 		
+		// Get list iems in dropdown, put items in this.list
 		this.updatedList = [];
 		let listItems = e.target.parentElement.nextSibling.nextSibling.getElementsByClassName('search__dropdown-menu-link');
 		for(let item of listItems){
@@ -139,13 +142,16 @@ export class Dropdown {
 			}
 		}
 
+		// Clear dropdown
 		if (typeof(e) !== 'undefined') {
 			this.clearList(e.target.parentElement.parentElement.lastChild.previousElementSibling);
 		}
 		
+		// Check if target value matchs with an item
+		// If match, create item and put item in this.updatedList
 		for(let item of this.list){
-			if(!this.updatedList.includes(item.toLowerCase())) {
-				if(item.toLowerCase().includes(e.target.value)){
+			if(item.toLowerCase().includes(e.target.value)){
+				if(!this.updatedList.includes(item.toLowerCase())) {
 					this.updatedList.push(item.toLowerCase());
 					const link = document.createElement('li');
 					link.classList.add('search__dropdown-menu-link');
@@ -155,7 +161,7 @@ export class Dropdown {
 			}
 		}
 
-		if(this.updatedList.length === 2) {
+		/* if(this.updatedList.length === 2) {
 			let links = e.target.parentElement.nextSibling.nextElementSibling.getElementsByClassName('search__dropdown-menu-link');
 			e.target.parentElement.parentElement.classList.add('medium-size');
 			for(let link of links){
@@ -176,12 +182,13 @@ export class Dropdown {
 			let button = e.target.parentElement.parentElement.parentElement;
 			if(button.classList.contains('list-medium-size')){
 				button.classList.remove('list-medium-size');
-				button.classList.add('large-size');
-				e.target.parentElement.parentElement.classList.remove('medium-size');
-				e.target.parentElement.parentElement.classList.add('list-large-size');
+				button.classList.add('list-large-size');
+				// e.target.parentElement.parentElement.classList.remove('medium-size');
+				// e.target.parentElement.parentElement.classList.add('list-large-size');
 			}
-		}
+		} */
 		new Tag();
+		new Search().getResult(e);
 	}
 
 	bindEvent(){

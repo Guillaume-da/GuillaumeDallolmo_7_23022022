@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
+import { Search } from '../Search.js';
+
 export class Tag {
 	constructor(){
 		this.tagsContainer = document.getElementsByClassName('tags')[0];
@@ -20,6 +22,7 @@ export class Tag {
 		span.innerHTML = `${tag} <i class="far fa-times-circle tags__icon"></i>`;
 		this.tagsContainer.appendChild(span);
 		this.bindEvent();
+		new Search().getResultByTag(tag);
 	} 
 
 	_getItemClicked(e) {
