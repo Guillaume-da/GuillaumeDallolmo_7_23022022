@@ -5,6 +5,7 @@ import { Search } from './Search.js';
 
 class App {
 	main() {
+		localStorage.clear();
 		new Dropdown(recipes);  
 		new RecipeCard(recipes); 
 		new Search();

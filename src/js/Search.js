@@ -23,22 +23,27 @@ export class Search {
 	
 	getDatas(datas, tag, array) {
 		datas.filter(recipe => {
-			if(recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) || recipe.appliance.toLowerCase().includes(tag.toLowerCase()) || recipe.ustensils.includes(tag.toLowerCase())){
+			if(recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) || recipe.appliance.toLowerCase().includes(tag.toLowerCase()) || recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(tag.toLowerCase()))){
 				if(!array.includes(recipe)) {
 					array.push(recipe);
 				}
 			}
 		});
+		localStorage.setItem('searchByTagArray', JSON.stringify(array));
 	}
 
 	getResultByTag(tag) {
-		let result = localStorage.getItem('searchResultArray');
-		result = JSON.parse(result);
+		let searchResult = localStorage.getItem('searchResultArray');
+		searchResult = JSON.parse(searchResult);
+		let searchByTagResult = localStorage.getItem('searchByTagArray');
+		searchByTagResult = JSON.parse(searchByTagResult);
 		
-		if(result === null){
+		if(searchResult === null && searchByTagResult === null){
 			this.getDatas(recipes, tag, this.searchByTagArray);
+		} else if(searchResult === null && searchByTagResult != null){
+			this.getDatas(searchByTagResult, tag, this.searchByTagArray);
 		} else {
-			this.getDatas(result, tag, this.searchByTagArray);
+			this.getDatas(searchResult, tag, this.searchByTagArray);
 		}
 		
 		this.clearCardsAndDropdowns();

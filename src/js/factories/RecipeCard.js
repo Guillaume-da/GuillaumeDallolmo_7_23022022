@@ -19,11 +19,10 @@ export class RecipeCard {
                         <li><span class="recipes__ingredient">${element.ingredient}</span> ${element.quantity ? `: ${element.quantity}` : ''}${element.unit ? `${element.unit}` : ''}</li>
                         `).join('')}
                     </ul>
-                    <p class="recipes__description">${recipe.description.slice(0, 210) + ' ...'}
+                    <p class="recipes__description">${recipe.description}
                     </p>
                 </div>
         `;
-		// console.log(recipe);
 		article.innerHTML = recipeCard;
 		return article;
 	}
