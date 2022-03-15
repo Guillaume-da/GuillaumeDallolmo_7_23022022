@@ -71,6 +71,9 @@ export class Dropdown {
 				break;
 			}
 		}
+		// console.log(this.utensilsList);
+		// console.log(this.ingredientsList);
+		// console.log(this.appliancesList);
 	}
 
 
@@ -115,23 +118,6 @@ export class Dropdown {
 	}
 
 	_updateDropdownListWhenInput(e) {
-		/* let results =  this.ingredientsList.filter((ingredient) => {
-			return ingredient.includes(e.target.value);
-		});
-		console.log(results);
-		if (typeof(e) !== 'undefined') {
-			this.clearList(e.target.parentElement.parentElement.lastChild.previousElementSibling);
-		}
-		const listContainer = document.getElementsByClassName('js-wrapper')[0];
-		for(let result of results) {
-			const item = document.createElement('li');
-			item.classList.add('search__dropdown-menu-link');
-
-			// Add uppercase to first letter
-			item.textContent = result;
-			listContainer.appendChild(item);
-		} */
-
 		
 		// Get list iems in dropdown, put items in this.list
 		this.updatedList = [];
@@ -150,15 +136,15 @@ export class Dropdown {
 		// Check if target value matchs with an item
 		// If match, create item and put item in this.updatedList
 		for(let item of this.list){
-			console.log(e.target.value);
+			// console.log(e.target.value);
 			if(item.toLowerCase().includes(e.target.value)){
 				if(!this.updatedList.includes(item.toLowerCase())) {
 					this.updatedList.push(item.toLowerCase());
 					const link = document.createElement('li');
 					link.classList.add('search__dropdown-menu-link');
 					link.textContent = item.toLowerCase();
-					console.log(this.updatedList);
-					console.log(e.target.parentElement.nextSibling.nextSibling);
+					/* console.log(this.updatedList);
+					console.log(e.target.parentElement.nextSibling.nextSibling); */
 					e.target.parentElement.nextSibling.nextSibling.appendChild(link); 
 				}
 			}
@@ -191,7 +177,6 @@ export class Dropdown {
 			}
 		} */
 		new Tag();
-		// new Search().getResult(e);
 	}
 
 	bindEvent(){

@@ -23,7 +23,7 @@ export class RecipeCard {
                     </p>
                 </div>
         `;
-        
+		// console.log(recipe);
 		article.innerHTML = recipeCard;
 		return article;
 	}

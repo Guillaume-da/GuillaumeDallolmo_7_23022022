@@ -201,7 +201,7 @@ table {
 }
 @media (min-width: 1380px) {
   .search__dropdown-menu {
-    width: 676px;
+    width: 691px;
   }
 }
 .search__dropdown-menu-header {
@@ -253,7 +253,8 @@ table {
 }
 .search__dropdown-menu-list {
   display: flex;
-  justify-content: space-between;
+  column-gap: 75px;
+  row-gap: 10px;
   flex-wrap: wrap;
   color: white;
   font-family: "Lato", sans-serif;
@@ -291,7 +292,7 @@ table {
 }
 
 .large-size {
-  width: 715px;
+  width: 732px;
 }
 
 .medium-size {
@@ -426,6 +427,18 @@ table {
   .recipes__description {
     font-size: 14px;
   }
+}
+.recipes__no-result-message {
+  background: #E7E7E7;
+  padding: 20px;
+  border-radius: 5px;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 14px;
+  margin-top: 115px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*# sourceMappingURL=style.css.map */

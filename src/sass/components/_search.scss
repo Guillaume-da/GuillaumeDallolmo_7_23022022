@@ -99,7 +99,7 @@
             z-index: 400;
         }
         @include breakpoint-large {
-            width: 676px;
+            width: 691px;
         }
     }
     &__dropdown-menu-header {
@@ -147,7 +147,8 @@
     }
     &__dropdown-menu-list {
         display: flex;
-        justify-content: space-between;
+        column-gap: 75px;
+        row-gap: 10px;
         flex-wrap: wrap;
         color: white;
         font-family: 'Lato', sans-serif;
@@ -184,7 +185,7 @@
 }
 
 .large-size {
-    width: 715px;
+    width: 732px;
 }
 
 .medium-size {

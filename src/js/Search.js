@@ -12,8 +12,8 @@ export class Search {
 		this.recipesWrapper = document.querySelector('.recipes');
 		this.listContainers = document.getElementsByClassName('search__dropdown-menu-list');
 
-		this.newResultArray = [];
-		this.resultArray = [];
+		this.searchByTagArray = [];
+		this.searchResultArray = [];
 		this.cleanArray = [];
 
 		this.getResult = (e) => this._getResult(e);
@@ -23,7 +23,7 @@ export class Search {
 	
 	getDatas(datas, tag, array) {
 		datas.filter(recipe => {
-			if(recipe.name.toLowerCase().includes(tag.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) || recipe.description.toLowerCase().includes(tag.toLowerCase())){
+			if(recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) || recipe.appliance.toLowerCase().includes(tag.toLowerCase()) || recipe.ustensils.includes(tag.toLowerCase())){
 				if(!array.includes(recipe)) {
 					array.push(recipe);
 				}
@@ -32,74 +32,61 @@ export class Search {
 	}
 
 	getResultByTag(tag) {
-		let searchResult = JSON.parse(localStorage.getItem('this.resultArray'));
-		console.log(searchResult);
-		console.log(tag.toLowerCase());
-		let result = localStorage.getItem('resultArray');
+		let result = localStorage.getItem('searchResultArray');
 		result = JSON.parse(result);
-		console.log('result', result);
 		
 		if(result === null){
-			console.log('true');
-			this.getDatas(recipes, tag, this.newResultArray);
-			/* recipes.forEach(recipe => {
-				if(recipe.name.toLowerCase().includes(tag.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) || recipe.description.toLowerCase().includes(tag.toLowerCase())){
-					if(!this.newResultArray.includes(recipe)) {
-						this.newResultArray.push(recipe);
-					}
-				}
-			}); */
+			this.getDatas(recipes, tag, this.searchByTagArray);
 		} else {
-			this.getDatas(result, tag, this.newResultArray);
-			/* result.forEach(recipe => {
-				if(recipe.name.toLowerCase().includes(tag.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) || recipe.description.toLowerCase().includes(tag.toLowerCase())){
-					if(!this.newResultArray.includes(recipe)) {
-						this.newResultArray.push(recipe);
-					}
-				}
-			}); */
+			this.getDatas(result, tag, this.searchByTagArray);
 		}
 		
-		console.log(this.newResultArray);
 		this.clearCardsAndDropdowns();
 		
-		new RecipeCard(this.newResultArray);
-		new Dropdown(this.newResultArray);
-		
-		console.log(this.newResultArray);
+		new RecipeCard(this.searchByTagArray);
+		new Dropdown(this.searchByTagArray);
 	}
 	
+	insertMessage() {
+		const paragraph = document.createElement('div');
+		paragraph.classList.add('recipes__no-result-message');
+		const message = `
+                <p>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>
+        `;
+		paragraph.innerHTML = message;
+		return paragraph;
+	}
 
 	_getResult(e) {	
+		localStorage.clear();
 		if(e.target.value.length === 0) {
 			localStorage.clear();
 		}
 		if(e.target.value.length >= 3) {
 			localStorage.clear();
-			this.resultArray = [];
-			this.getDatas(recipes, e.target.value, this.resultArray);
-			/* recipes.forEach(recipe => {
+			this.searchResultArray = [];
+			recipes.forEach(recipe => {
 				if(recipe.name.toLowerCase().includes(e.target.value) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(e.target.value)) || recipe.description.toLowerCase().includes(e.target.value)){
-					if(!this.resultArray.includes(recipe)) {
-						this.resultArray.push(recipe);
-						
+					if(!this.searchResultArray.includes(recipe)) {
+						this.searchResultArray.push(recipe);
 					}
 				}
-			}); */
-			localStorage.setItem('resultArray', JSON.stringify(this.resultArray));
+			});
+			localStorage.setItem('searchResultArray', JSON.stringify(this.searchResultArray));
 			this.clearCardsAndDropdowns();
-			new RecipeCard(this.resultArray);
-			new Dropdown(this.resultArray);
+			let result = localStorage.getItem('searchResultArray');
+			result = JSON.parse(result);
+			if(result.length === 0){
+				this.recipesWrapper.appendChild(this.insertMessage());
+			}
+			new RecipeCard(this.searchResultArray);
+			new Dropdown(this.searchResultArray);
 				
 		} else if (e.target.value.length < 3) {
 			this.clearCardsAndDropdowns();
 			new RecipeCard(recipes);
 			new Dropdown(recipes);	
 		}
-		
-		let result = localStorage.getItem('resultArray');
-		result = JSON.parse(result);
-		// console.log('result', result);
 	}
 
 	clearList(wrapper) {
@@ -111,7 +98,6 @@ export class Search {
 	clearCardsAndDropdowns() {
 		this.clearList(this.recipesWrapper);
 		for(let container of this.listContainers) {
-			// console.log(container.firstChild);
 			this.clearList(container);
 		}
 	}
