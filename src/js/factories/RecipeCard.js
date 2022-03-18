@@ -1,7 +1,6 @@
 export class RecipeCard {
-	constructor(recipes) {
+	constructor() {
 		this.recipesWrapper = document.querySelector('.recipes');
-		this.displayAllRecipes(recipes);
 	}
 
 	createRecipeCard(recipe) {
@@ -19,7 +18,7 @@ export class RecipeCard {
                         <li><span class="recipes__ingredient">${element.ingredient}</span> ${element.quantity ? `: ${element.quantity}` : ''}${element.unit ? `${element.unit}` : ''}</li>
                         `).join('')}
                     </ul>
-                    <p class="recipes__description">${recipe.description}
+                    <p class="recipes__description">${recipe.description.slice(0, 210) + ' ...'}
                     </p>
                 </div>
         `;
@@ -28,6 +27,7 @@ export class RecipeCard {
 	}
 
 	displayAllRecipes(recipes) {
+		
 		// eslint-disable-next-line no-undef
 		recipes.forEach(recipe => {
 			this.recipesWrapper.appendChild(this.createRecipeCard(recipe));

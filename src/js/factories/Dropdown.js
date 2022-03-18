@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
-
+// import { Search } from '../Search.js';
 import { Tag } from './Tag.js';
 
 export class Dropdown {
-	constructor(recipes) {
+	constructor() {
 		this.ingredientsList = [];
 		this.appliancesList = [];
 		this.utensilsList = [];
@@ -14,16 +14,18 @@ export class Dropdown {
 		this.inputs = document.getElementsByClassName('js-input');
 		this.dropdownsLists = document.getElementsByClassName('js-showDropdownList');
 		this.listContainers = document.getElementsByClassName('js-wrapper');
-
-		this.getListDatas(recipes);
+		this.tagsContainer = document.getElementsByClassName('tags')[0];
+		this.items = document.getElementsByClassName('search__dropdown-menu-link');
+		this.tagsIcons = document.getElementsByClassName('tags__icon');
 
 		this.openDropdown = (e) => this._openDropdown(e);
 		this.closeDropdown = (e) => this._closeDropdown(e);
 		this.updateDropdownListWhenInput = (e) => this._updateDropdownListWhenInput(e);
+		this.getItemClicked = (e) => this._getItemClicked(e);
+		this.closeTag = (e) => this._closeTag(e);
 
-		this.bindEvent();
-
-		new Tag();
+		console.log('dropdown constructor');
+		// this.bindEvent();
 	}
 
 	// Create list item
@@ -34,6 +36,7 @@ export class Dropdown {
 		// Add uppercase to first letter
 		item.textContent = data.charAt(0).toUpperCase() + data.slice(1);
 		wrapper.appendChild(item); 
+		
 	}
 
 	isValidItem(list, listWrapper, item) {
@@ -43,7 +46,7 @@ export class Dropdown {
 		}
 	}
 
-	getListDatas(recipes) {
+	getListDatas(recipes, tag) {
 		for(let listContainer of this.listContainers) {
 			const listWrapper = listContainer.parentElement.lastChild.previousSibling;
 			const button = listContainer.parentElement.parentElement.firstChild.nextSibling.dataset.filter;
@@ -51,7 +54,9 @@ export class Dropdown {
 			case 'ingredients':
 				recipes.forEach(recipe => {
 					recipe.ingredients.forEach(ingredient => {
-						this.isValidItem(this.ingredientsList, listWrapper, ingredient.ingredient);
+						if(ingredient.ingredient !== tag){
+							this.isValidItem(this.ingredientsList, listWrapper, ingredient.ingredient);
+						}
 					});
 				});
 				break;
@@ -69,9 +74,9 @@ export class Dropdown {
 				break;
 			}
 		}
-		// console.log(this.utensilsList);
-		// console.log(this.ingredientsList);
-		// console.log(this.appliancesList);
+		let displayTags = new Tag();
+		// displayTags.unbindEvent();
+		displayTags.bindEvent();
 	}
 
 
@@ -171,7 +176,8 @@ export class Dropdown {
 				// e.target.parentElement.parentElement.classList.add('list-large-size');
 			}
 		} */
-		new Tag();
+		let displayTags = new Tag();
+		displayTags.bindEvent();
 	}
 
 	bindEvent(){
@@ -184,5 +190,19 @@ export class Dropdown {
 		for(const input of this.inputs) {
 			input.addEventListener('input', this.updateDropdownListWhenInput);
 		}
+		console.log('bind dropdown');
+	}
+
+	unbindEvent(){
+		for(const dropdownButton of this.dropdownButtons) {
+			dropdownButton.removeEventListener('click', this.openDropdown);
+		}
+		for(const closeButton of this.closeButtons) {
+			closeButton.removeEventListener('click', this.closeDropdown);
+		}
+		for(const input of this.inputs) {
+			input.removeEventListener('input', this.updateDropdownListWhenInput);
+		}
+		console.log('unbind dropdown');
 	}
 }

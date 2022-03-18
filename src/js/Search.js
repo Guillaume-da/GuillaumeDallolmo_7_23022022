@@ -11,14 +11,13 @@ export class Search {
 		this.articlesArray = Array.prototype.slice.call( this.articles, 0 );
 		this.recipesWrapper = document.querySelector('.recipes');
 		this.listContainers = document.getElementsByClassName('search__dropdown-menu-list');
-
+		this.currentTag = [];
 		this.searchByTagArray = [];
 		this.searchResultArray = [];
 		this.cleanArray = [];
 
 		this.getResult = (e) => this._getResult(e);
-		
-		this.bindEvent();
+		console.log('search constructor');
 	}
 	
 	getDatas(datas, tag, array) {
@@ -33,6 +32,9 @@ export class Search {
 	}
 
 	getResultByTag(tag) {
+		if(tag) {
+			this.currentTag.push(tag);
+		}
 		let searchResult = localStorage.getItem('searchResultArray');
 		searchResult = JSON.parse(searchResult);
 		let searchByTagResult = localStorage.getItem('searchByTagArray');
@@ -48,8 +50,13 @@ export class Search {
 		
 		this.clearCardsAndDropdowns();
 		
-		new RecipeCard(this.searchByTagArray);
-		new Dropdown(this.searchByTagArray);
+		let displaySearchResult = new RecipeCard();
+		displaySearchResult.displayAllRecipes(this.searchByTagArray);
+
+		let updateDropdown = new Dropdown();
+		updateDropdown.getListDatas(this.searchByTagArray, tag);
+		// updateDropdown.unbindEvent();
+		updateDropdown.bindEvent();
 	}
 	
 	insertMessage() {
@@ -63,11 +70,11 @@ export class Search {
 	}
 
 	_getResult(e) {	
-		localStorage.clear();
 		if(e.target.value.length === 0) {
 			localStorage.clear();
 		}
 		if(e.target.value.length >= 3) {
+			console.log(e.target.value);
 			localStorage.clear();
 			this.searchResultArray = [];
 			recipes.forEach(recipe => {
@@ -81,17 +88,28 @@ export class Search {
 			this.clearCardsAndDropdowns();
 			let result = localStorage.getItem('searchResultArray');
 			result = JSON.parse(result);
-			if(result.length === 0){
+			if(this.searchResultArray.length === 0){
 				this.recipesWrapper.appendChild(this.insertMessage());
 			}
-			new RecipeCard(this.searchResultArray);
-			new Dropdown(this.searchResultArray);
+			
+			let displaySearchResult = new RecipeCard();
+			displaySearchResult.displayAllRecipes(this.searchResultArray);
+
+			let updateDropdown = new Dropdown();
+			updateDropdown.getListDatas(this.searchResultArray);
+			// updateDropdown.unbindEvent();
+			updateDropdown.bindEvent();
 				
-		} else if (e.target.value.length < 3) {
+		} /* else if (e.target.value.length < 3) {
 			this.clearCardsAndDropdowns();
-			new RecipeCard(recipes);
-			new Dropdown(recipes);	
-		}
+			let displaySearchResult = new RecipeCard();
+			displaySearchResult.displayAllRecipes(recipes);
+
+			let updateDropdown = new Dropdown();
+			updateDropdown.getListDatas(recipes);
+			// updateDropdown.unbindEvent();
+			updateDropdown.bindEvent();
+		} */
 	}
 
 	clearList(wrapper) {
@@ -109,6 +127,7 @@ export class Search {
 
 	bindEvent(){
 		this.searchInput.addEventListener('input', this.getResult);
+		console.log('bind search');
 	}
 	
 }
