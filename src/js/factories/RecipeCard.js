@@ -1,36 +1,39 @@
 export class RecipeCard {
-	constructor() {
-		this.recipesWrapper = document.querySelector('.recipes');
+	constructor(recipes) {
+		this.wrapper = document.querySelector('.recipes');
+
+		this.displayAllRecipes(recipes);
+		console.log('recipeCard constructor');
 	}
 
-	createRecipeCard(recipe) {
+	createRecipeCard(data) {
 		const article = document.createElement('article');
 		article.classList.add('recipes__item');
 		const recipeCard = `
                 <img src="src/img/recipe-img.svg" alt="recipe" class="recipes__image">
                 <div class="recipes__title-container">
-                    <h2 class="recipes__title">${recipe.name}</h2>
-                    <span class="recipes__duration"><i class="fas fa-clock"></i> ${recipe.time} min</span>
+                    <h2 class="recipes__title">${data.name}</h2>
+                    <span class="recipes__duration"><i class="fas fa-clock"></i> ${data.time} min</span>
                 </div>
                 <div class="recipes__ingredients-container">
                     <ul class="recipes__ingredients">
-                        ${recipe.ingredients.map(element => `
+                        ${data.ingredients.map(element => `
                         <li><span class="recipes__ingredient">${element.ingredient}</span> ${element.quantity ? `: ${element.quantity}` : ''}${element.unit ? `${element.unit}` : ''}</li>
                         `).join('')}
                     </ul>
-                    <p class="recipes__description">${recipe.description.slice(0, 210) + ' ...'}
+                    <p class="recipes__description">${data.description.slice(0, 210) + ' ...'}
                     </p>
                 </div>
         `;
+        
 		article.innerHTML = recipeCard;
 		return article;
 	}
 
 	displayAllRecipes(recipes) {
-		
 		// eslint-disable-next-line no-undef
 		recipes.forEach(recipe => {
-			this.recipesWrapper.appendChild(this.createRecipeCard(recipe));
+			this.wrapper.appendChild(this.createRecipeCard(recipe));
 		});
 	} 
 }

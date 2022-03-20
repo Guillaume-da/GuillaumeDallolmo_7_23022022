@@ -292,7 +292,12 @@ table {
 }
 
 .large-size {
-  width: 732px;
+  width: 100%;
+}
+@media (min-width: 1380px) {
+  .large-size {
+    width: 732px;
+  }
 }
 
 .medium-size {

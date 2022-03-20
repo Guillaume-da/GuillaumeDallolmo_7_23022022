@@ -185,7 +185,11 @@
 }
 
 .large-size {
-    width: 732px;
+    width: 100%;
+    @include breakpoint-large {
+        width: 732px;
+    }
+    
 }
 
 .medium-size {
