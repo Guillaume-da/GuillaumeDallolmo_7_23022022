@@ -38,6 +38,7 @@ export class Search {
 		this.openDropdown = (e) => this._openDropdown(e);
 		this.closeDropdown = (e) => this._closeDropdown(e);
 		this.getItemClicked = (e) => this._getItemClicked(e);
+		this.updateDropdownListWhenInput = (e) => this._updateDropdownListWhenInput(e);
 		
 		this.recipeCard = new RecipeCard(recipes);
 		this.getListDatas(recipes);
@@ -89,6 +90,9 @@ export class Search {
 		}
 		this.clearCardsAndDropdowns();
 		if (this.searchResultArray.length === 0 && this.searchByTagArray.length === 0){
+			if(tagsList === this.ingredientsList){
+				this.ingredientsList(recipes, tagsList, this.searchByTagArray, parent);
+			}
 			getDatas(recipes, tagsList, this.searchByTagArray, parent);
 			
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
@@ -104,122 +108,13 @@ export class Search {
 			this.searchByTagArray = [];
 			let data = localStorage.getItem('resultByTag');
 			data = JSON.parse(data);
-			// console.log('data', data);
-			// console.log(this.tagsIngredientsList);
 			getDatas(data, tagsList, this.searchByTagArray);
 			
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray);
 			// localStorage.clear();
 		}
-
-		// console.log('this.searchByTagArray', this.searchByTagArray);
-		// console.log('this.searchResultArray', this.searchResultArray);
 	}
-
-	/* getResultByIngredientTag(tag) {
-		localStorage.clear();
-		if(tag) {
-			this.tagsIngredientsList.push(tag.toLowerCase());
-		}
-		this.clearCardsAndDropdowns();
-		console.log(tag);
-		if (this.searchResultArray.length === 0 && this.searchByTagArray.length === 0){
-			this.getDatasByIngredients(recipes, this.tagsIngredientsList, this.searchByTagArray, parent);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-		} else if (this.searchResultArray.length  > 0 && this.searchByTagArray.length === 0){
-			this.getDatasByIngredients(this.searchResultArray, this.tagsIngredientsList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-		} else if (this.searchResultArray.length === 0 && this.searchByTagArray.length > 0) {
-			
-			localStorage.setItem('resultByTag', JSON.stringify(this.searchByTagArray));
-			this.searchByTagArray = [];
-			let data = localStorage.getItem('resultByTag');
-			data = JSON.parse(data);
-			console.log('data', data);
-			console.log(this.tagsIngredientsList);
-			this.getDatasByIngredients(data, this.tagsIngredientsList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-			// localStorage.clear();
-		}
-
-		console.log('this.searchByTagArray', this.searchByTagArray);
-		console.log('this.searchResultArray', this.searchResultArray);
-	} */
-
-	/* getResultByApplianceTag(tag) {
-		localStorage.clear();
-		if(tag) {
-			this.tagsAppliancesList.push(tag.toLowerCase());
-		}
-		this.clearCardsAndDropdowns();
-		console.log(tag);
-		if (this.searchResultArray.length === 0 && this.searchByTagArray.length === 0){
-			this.getDatasByAppliance(recipes, this.tagsAppliancesList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-		} else if (this.searchResultArray.length  > 0 && this.searchByTagArray.length === 0){
-			this.getDatasByAppliances(this.searchResultArray, this.tagsAppliancesList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-		} else if (this.searchResultArray.length === 0 && this.searchByTagArray.length > 0) {
-			console.log('getResultByApplianceTag');
-			localStorage.setItem('resultByTag', JSON.stringify(this.searchByTagArray));
-			this.searchByTagArray = [];
-			let data = localStorage.getItem('resultByTag');
-			data = JSON.parse(data);
-			this.getDatasByAppliance(data, this.tagsAppliancesList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-			// localStorage.clear();
-		}
-
-		console.log('this.searchByTagArray', this.searchByTagArray);
-		console.log('this.searchResultArray', this.searchResultArray);
-	} */
-
-	/* getResultByUtensilTag(tag) {
-		localStorage.clear();
-		if(tag) {
-			this.tagsUtensilsList.push(tag.toLowerCase());
-		}
-		this.clearCardsAndDropdowns();
-		console.log(tag);
-		if (this.searchResultArray.length === 0 && this.searchByTagArray.length === 0){
-			this.getDatasByUtensils(recipes, this.tagsUtensilsList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-		} else if (this.searchResultArray.length  > 0 && this.searchByTagArray.length === 0){
-			this.getDatasByUtensils(this.searchResultArray, this.tagsUtensilsList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-		} else if (this.searchResultArray.length === 0 && this.searchByTagArray.length > 0) {
-			console.log('getResultByApplianceTag');
-			localStorage.setItem('resultByTag', JSON.stringify(this.searchByTagArray));
-			this.searchByTagArray = [];
-			let data = localStorage.getItem('resultByTag');
-			data = JSON.parse(data);
-			this.getDatasByUtensils(data, this.tagsUtensilsList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-			// localStorage.clear();
-		}
-
-		console.log('this.searchByTagArray', this.searchByTagArray);
-		console.log('this.searchResultArray', this.searchResultArray);
-	} */
 	
 	insertMessage() {
 		const paragraph = document.createElement('div');
@@ -259,6 +154,39 @@ export class Search {
 			this.getListDatas(recipes);
 		}
 		
+	}
+
+	_updateDropdownListWhenInput(e) {
+
+		// Get list iems in dropdown, put items in this.list
+		this.updatedList = [];
+		let listItems = e.target.parentElement.nextSibling.nextSibling.getElementsByClassName('search__dropdown-menu-link');
+		for(let item of listItems){
+			if(!this.list.includes(item.textContent.toLowerCase())){
+				this.list.push(item.textContent.toLowerCase());
+			}
+		}
+		// Clear dropdown
+		if (typeof(e) !== 'undefined') {
+			this.clearList(e.target.parentElement.parentElement.lastChild.previousElementSibling);
+		}
+		
+		// Check if target value matchs with an item
+		// If match, create item and put item in this.updatedList
+		for(let item of this.list){
+			if(item.toLowerCase().includes(e.target.value)){
+				if(!this.updatedList.includes(item.toLowerCase())) {
+					this.updatedList.push(item.toLowerCase());
+					const link = document.createElement('li');
+					link.classList.add('search__dropdown-menu-link');
+					link.textContent = item.toLowerCase();
+					e.target.parentElement.nextSibling.nextSibling.appendChild(link); 
+				}
+			}
+		}
+		for(const element of this.listItems) {
+			element.addEventListener('click', this.getItemClicked);
+		}
 	}
 
 	clearList(wrapper) {
@@ -350,9 +278,12 @@ export class Search {
 				this.searchByTagArray = [];
 				this.recipeCard.displayAllRecipes(this.searchResultArray);
 				this.getListDatas(this.searchResultArray);
-			} else if (this.tagsIngredientsList.length > 0) {
+			} else if (this.searchResultArray.length === 0 && this.tagsIngredientsList.length > 0) {
+				console.log(this.searchByTagArray);
 				let data = localStorage.getItem('resultByTag');
 				data = JSON.parse(data);
+				console.log(data);
+				console.log(this.tagsIngredientsList);
 				this.recipeCard.displayAllRecipes(data);
 				this.getListDatas(data);
 			} else {
@@ -361,6 +292,9 @@ export class Search {
 				this.getListDatas(recipes);
 			}
 		} else if (item.parentElement.style.backgroundColor === 'rgb(104, 217, 164)') {
+			this.tagsAppliancesList = this.tagsAppliancesList.map(e => e.replace(/\s+/g, ''));
+			this.tagsAppliancesList.splice(this.tagsAppliancesList.indexOf(tag), 1);
+			console.log(this.tagsAppliancesList);
 			item.parentElement.remove();
 			
 		} else if (item.parentElement.style.backgroundColor === 'rgb(208, 79, 79)') {
