@@ -6,7 +6,6 @@ export class App {
 	constructor() {
 		localStorage.clear();
 		this.search = new Search();
-		console.log(recipes);
 	}
 }
 

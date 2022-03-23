@@ -112,7 +112,7 @@ export class Search {
 			
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray);
-			// localStorage.clear();
+			localStorage.clear();
 		}
 	}
 	
@@ -279,15 +279,16 @@ export class Search {
 				this.recipeCard.displayAllRecipes(this.searchResultArray);
 				this.getListDatas(this.searchResultArray);
 			} else if (this.searchResultArray.length === 0 && this.tagsIngredientsList.length > 0) {
-				console.log(this.searchByTagArray);
-				let data = localStorage.getItem('resultByTag');
-				data = JSON.parse(data);
-				console.log(data);
+				this.searchByTagArray = [];
 				console.log(this.tagsIngredientsList);
-				this.recipeCard.displayAllRecipes(data);
-				this.getListDatas(data);
-			} else {
+				this.getDatasByIngredients(recipes, this.tagsIngredientsList, this.searchByTagArray);
+				console.log(this.tagsIngredientsList);
+				console.log(this.searchByTagArray);
+				this.recipeCard.displayAllRecipes(this.searchByTagArray);
+				this.getListDatas(this.searchByTagArray);
+			} else if(this.tagsIngredientsList.length === 0 && this.searchResultArray.length === 0){
 				localStorage.clear();
+				this.searchByTagArray = [];
 				this.recipeCard.displayAllRecipes(recipes);
 				this.getListDatas(recipes);
 			}
@@ -296,6 +297,20 @@ export class Search {
 			this.tagsAppliancesList.splice(this.tagsAppliancesList.indexOf(tag), 1);
 			console.log(this.tagsAppliancesList);
 			item.parentElement.remove();
+			if (this.searchResultArray.length === 0 && this.tagsAppliancesList.length > 0) {
+				this.searchByTagArray = [];
+				console.log(this.tagsAppliancesList);
+				this.getDatasByIngredients(recipes, this.tagsAppliancesList, this.searchByTagArray);
+				console.log(this.tagsAppliancesList);
+				console.log(this.searchByTagArray);
+				this.recipeCard.displayAllRecipes(this.searchByTagArray);
+				this.getListDatas(this.searchByTagArray);
+			} else if(this.tagsAppliancesList.length === 0 && this.searchResultArray.length === 0){
+				localStorage.clear();
+				this.searchByTagArray = [];
+				this.recipeCard.displayAllRecipes(recipes);
+				this.getListDatas(recipes);
+			}
 			
 		} else if (item.parentElement.style.backgroundColor === 'rgb(208, 79, 79)') {
 			item.parentElement.remove();
