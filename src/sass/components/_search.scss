@@ -99,7 +99,7 @@
             z-index: 400;
         }
         @include breakpoint-large {
-            width: 691px;
+            width: 676px;
         }
     }
     &__dropdown-menu-header {
@@ -147,8 +147,7 @@
     }
     &__dropdown-menu-list {
         display: flex;
-        column-gap: 75px;
-        row-gap: 10px;
+        justify-content: space-between;
         flex-wrap: wrap;
         color: white;
         font-family: 'Lato', sans-serif;
@@ -184,12 +183,15 @@
     width: 170px;
 }
 
+.small-size-container {
+    width: 210px;
+}
+
 .large-size {
     width: 100%;
     @include breakpoint-large {
-        width: 732px;
+        width: 715px;
     }
-    
 }
 
 .medium-size {
@@ -206,4 +208,8 @@
 
 .half-size {
     width: 40%;
+}
+
+.full-size {
+    width: 100%;
 }
