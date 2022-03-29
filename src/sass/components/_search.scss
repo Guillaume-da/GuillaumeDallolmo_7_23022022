@@ -183,8 +183,19 @@
     width: 170px;
 }
 
+.small-size-container {
+    width: 210px;
+}
+
+.small-size-container-closed {
+    width: 170px;
+}
+
 .large-size {
-    width: 715px;
+    width: 100%;
+    @include breakpoint-large {
+        width: 715px;
+    }
 }
 
 .medium-size {
@@ -201,4 +212,8 @@
 
 .half-size {
     width: 40%;
+}
+
+.full-size {
+    width: 100%;
 }

@@ -1,8 +1,9 @@
 export class RecipeCard {
-	constructor() {
-		this.recipesWrapper = document.querySelector('.recipes');
+	constructor(recipes) {
+		this.wrapper = document.querySelector('.recipes');
 
-		this.displayAllRecipes();
+		this.displayAllRecipes(recipes);
+		console.log('recipeCards constructor');
 	}
 
 	createRecipeCard(data) {
@@ -29,10 +30,10 @@ export class RecipeCard {
 		return article;
 	}
 
-	displayAllRecipes() {
+	displayAllRecipes(recipes) {
 		// eslint-disable-next-line no-undef
 		recipes.forEach(recipe => {
-			this.recipesWrapper.appendChild(this.createRecipeCard(recipe));
+			this.wrapper.appendChild(this.createRecipeCard(recipe));
 		});
 	} 
 }

@@ -290,8 +290,21 @@ table {
   width: 170px;
 }
 
+.small-size-container {
+  width: 210px;
+}
+
+.small-size-container-closed {
+  width: 170px;
+}
+
 .large-size {
-  width: 715px;
+  width: 100%;
+}
+@media (min-width: 1380px) {
+  .large-size {
+    width: 715px;
+  }
 }
 
 .medium-size {
@@ -308,6 +321,10 @@ table {
 
 .half-size {
   width: 40%;
+}
+
+.full-size {
+  width: 100%;
 }
 
 .tags {
@@ -426,6 +443,18 @@ table {
   .recipes__description {
     font-size: 14px;
   }
+}
+.recipes__no-result-message {
+  background: #E7E7E7;
+  padding: 20px;
+  border-radius: 5px;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 14px;
+  margin-top: 115px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*# sourceMappingURL=style.css.map */
