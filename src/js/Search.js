@@ -144,7 +144,7 @@ export class Search {
 						this.searchResultArray.push(recipe);
 					}
 				}
-			};
+			}
 			this.clearCardsAndDropdowns();
 			
 			if(this.searchResultArray.length === 0){
