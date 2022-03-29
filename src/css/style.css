@@ -294,6 +294,10 @@ table {
   width: 210px;
 }
 
+.small-size-container-closed {
+  width: 170px;
+}
+
 .large-size {
   width: 100%;
 }

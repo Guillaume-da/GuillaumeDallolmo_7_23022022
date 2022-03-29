@@ -1726,3 +1726,13 @@ const recipes = [
 		"ustensils":["rouleau à patisserie","fouet"]
 	}
 ];
+
+this.searchResultArray = [];
+let tag = 'coco';
+recipes.forEach(recipe => {
+	if(recipe.name.toLowerCase().includes(tag) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(tag)) || recipe.description.toLowerCase().includes(tag)){
+		if(!this.searchResultArray.includes(recipe)) {
+			this.searchResultArray.push(recipe);
+		}
+	}
+});
