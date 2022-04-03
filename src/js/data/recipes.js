@@ -85,7 +85,7 @@ const recipes = [
 				"unit" : "ml"
 			},
 			{
-				"ingredient": "Coulis de tomate",
+				"ingredient": "Coulis de tomates",
 				"quantity" : 25,
 				"unit" : "cl"
 			},
@@ -169,7 +169,7 @@ const recipes = [
 				"unit": "cuillères à soupe"
 			},
 			{
-				"ingredient": "gruyère râpé",
+				"ingredient": "Gruyère râpé",
 				"quantity": 100,
 				"unit": "grammes"
 			},
@@ -207,7 +207,7 @@ const recipes = [
 				"unit": "cl"
 			},
 			{
-				"ingredient": "Sucre en Poudre",
+				"ingredient": "Sucre en poudre",
 				"quantity": 100,
 				"unit":"grammes"
 			},
@@ -280,12 +280,12 @@ const recipes = [
 				"quantity": 2
 			},
 			{
-				"ingredient": "Sucre en Poudre",
+				"ingredient": "Sucre en poudre",
 				"quantity": "110",
 				"unit": "grammes"
 			},
 			{
-				"ingredient": "farine",
+				"ingredient": "Farine",
 				"quantity": 90,
 				"unit": "grammes"
 			}
@@ -361,7 +361,7 @@ const recipes = [
 		"time": 60,
 		"description": "Commencer par cuire les pommes de terre dans l'eau bouillante. Puis epluchez les et coupez les en rondelles. Emincer les oignons puis les faire dorer dans du beurre. Ajouter le jambon fumé coupé en en morceaux ainsi que les pommes de terres. Salez, poivrez à votre gout ( et celui de vos convives ) Laissez cuisiner durant environ 10 minutes puis ajouter le vin blanc. Après 5 minutes, mettre le tout dans un plat à gratin. Coupez le rebelochon, soit en tranches, soit le couper en 2 dans le sens de l'épaisseur et recouvrir les pommes de terre. Cuire au four (environ 220°) durant 25 minutes. C'est prêt !",
 		"appliance":"Four",
-		"ustensils": ["plat à gratin", "couteau","Économe"]
+		"ustensils": ["plat à gratin", "couteau","économe"]
 	},{
 		"id": 11,
 		"name": "Salade tomate, mozzarella et pommes",
@@ -456,7 +456,7 @@ const recipes = [
 				"unit":"cuillère à soupe"
 			},
 			{
-				"ingredient": "huile d'olive",
+				"ingredient": "Huile d'olive",
 				"quantity": 2,
 				"unit": "cuillère à soupe"
 			}
@@ -571,7 +571,7 @@ const recipes = [
 				"unit":"tiges"
 			},
 			{
-				"ingredient": "huile d'olives",
+				"ingredient": "Huile d'olive",
 				"quantity": 2,
 				"unit": "cuillère à soupe"
 			}
@@ -634,7 +634,7 @@ const recipes = [
 			}
 		],
 		"time": 10,
-		"description":"Séparez 1/5ème d'Ananas ( une belle tranche qui servira pour la décoration des verres ), mettre le reste coupé en cubes au blender, ajouter la glace à la vanille et le lait. Mixez. Servir et décorer avec l'ananas restant. C'est prêt",
+		"description":"Séparez 1/5ème d'ananas ( une belle tranche qui servira pour la décoration des verres ), mettre le reste coupé en cubes au blender, ajouter la glace à la vanille et le lait. Mixez. Servir et décorer avec l'ananas restant. C'est prêt",
 		"appliance": "Blender",
 		"ustensils":["verres", "couteau"]
 	},
@@ -697,7 +697,7 @@ const recipes = [
 				"unit":"grammes"
 			},
 			{
-				"ingredient": "huile d'olive",
+				"ingredient": "Huile d'olive",
 				"quantity": 1,
 				"unit": "cuillères à soupe"
 			}
@@ -722,7 +722,7 @@ const recipes = [
 				"quantity": 2
 			},
 			{
-				"ingredient": "Coulis de tomate",
+				"ingredient": "Coulis de tomates",
 				"quantity": 300,
 				"unit":"grammes"
 			},
@@ -737,7 +737,7 @@ const recipes = [
 				"unit": "cl"
 			},
 			{
-				"ingredient": "Crème Fraîche",
+				"ingredient": "Crème fraîche",
 				"quantity" : 1,
 				"unit": "cuillères à soupe"
 			}
@@ -745,7 +745,7 @@ const recipes = [
 		"time": 30,
 		"description":"Cuisiner la viande hachée dans une poelle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraiche à la viande hachée. Serivir.",
 		"appliance": "Casserole",
-		"ustensils":["Cuillère en bois", "louche", "couteau"]
+		"ustensils":["cuillère en bois", "louche", "couteau"]
 	},
 	{
 		"id": 22,
@@ -807,7 +807,7 @@ const recipes = [
 				"quantity": 3
 			},
 			{
-				"ingredient": "Crème Fraîche",
+				"ingredient": "Crème fraîche",
 				"quantity": 20,
 				"unit": "cl"
 			},
@@ -910,7 +910,7 @@ const recipes = [
 				"quantity": 1
 			},
 			{
-				"ingredient": "Huile d'olives"
+				"ingredient": "Huile d'olive"
 			},
 			{
 				"ingredient": "Oignon",
@@ -1283,7 +1283,7 @@ const recipes = [
 				"unit": "grammes"
 			},
 			{
-				"ingredient": "Huile d'olives",
+				"ingredient": "Huile d'olive",
 				"quantity": 25,
 				"unit": "cl"
 			},
@@ -1306,7 +1306,7 @@ const recipes = [
 		"time": 60,
 		"description":"Couper les courgettes dans le sens de la longueur. Vider les courgette dans un saladier. Réserver.Faire revenir la chair des courgettes dans 25cl d'huile d'olive. Ajouter l'oignon puis la viande hachée. Mettre la farce dans les courgettes. Ajouter le coulis de tomates. Mettre au four pendant 30 minutes. Avant la fin de la cuisson ajouter le fromage rapé",
 		"appliance": "Four",
-		"ustensils":["couteau", "cuillère en bois", "Poelle à frire"]
+		"ustensils":["couteau", "cuillère en bois", "poelle à frire"]
 	},
 	{
 		"id": 38,
@@ -1336,7 +1336,7 @@ const recipes = [
 		"time": 20,
 		"description":"Fouettez les oeufs, le sucre et le lait. tremper les tranches de pain. Le cuire au four pendant environ 10 minutes à 180°. Servir",
 		"appliance": "Four",
-		"ustensils":["fouet", "bol","Cuillère à Soupe"]
+		"ustensils":["fouet", "bol","cuillère à Soupe"]
 	},
 	{
 		"id": 39,
@@ -1511,7 +1511,7 @@ const recipes = [
 				"unit":"grammes"
 			},
 			{
-				"ingredient": "farine",
+				"ingredient": "Farine",
 				"quantity": 40,
 				"unit": "grammes"
 			}
@@ -1612,7 +1612,7 @@ const recipes = [
 				"unit": "grammes"
 			},
 			{
-				"ingredient": "Crème Fraîche",
+				"ingredient": "Crème fraîche",
 				"quantity": 20,
 				"unit":"cl"
 			}
@@ -1663,11 +1663,11 @@ const recipes = [
 		"servings": 4,
 		"ingredients": [
 			{
-				"ingredient": "Bananes",
+				"ingredient": "Banane",
 				"quantity": 2
 			},
 			{
-				"ingredient": "Kiwis",
+				"ingredient": "Kiwi",
 				"quantity": 3
 			},
 			{
@@ -1705,7 +1705,7 @@ const recipes = [
 				"quantity": 6
 			},
 			{
-				"ingredient": "Poudre d'amendes",
+				"ingredient": "Poudre d'amande",
 				"quantity": 500,
 				"unit": "grammes"
 			},
@@ -1721,7 +1721,7 @@ const recipes = [
 			}
 		],
 		"time": 60,
-		"description":"Préparer la frangipane : Mélanger le sucre la poudre d'amander, le beurre et les oeufs. Etaler la moitier de la pate feuilleté et mettre dans un moule à tarte. Garnir de frangipane et recouvrir du reste de pate feuilletée. Mettre au four 30 minutes",
+		"description":"Préparer la frangipane : Mélanger le sucre la poudre d'amande, le beurre et les oeufs. Etaler la moitier de la pate feuilleté et mettre dans un moule à tarte. Garnir de frangipane et recouvrir du reste de pate feuilletée. Mettre au four 30 minutes",
 		"appliance": "Four",
 		"ustensils":["rouleau à patisserie","fouet"]
 	}

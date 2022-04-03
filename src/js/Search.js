@@ -32,6 +32,7 @@ export class Search {
 		this.inputs = document.getElementsByClassName('js-input');
 		this.dropdownsLists = document.getElementsByClassName('js-showDropdownList');
 		this.tagsContainer = document.getElementsByClassName('tags')[0];
+		this.tags = document.getElementsByClassName('tags__item');
 
 		this.closeTag = (e) => this._closeTag(e);
 		this.getResult = (e) => this._getResult(e);
@@ -39,9 +40,11 @@ export class Search {
 		this.closeDropdown = (e) => this._closeDropdown(e);
 		this.getItemClicked = (e) => this._getItemClicked(e);
 		this.updateDropdownListWhenInput = (e) => this._updateDropdownListWhenInput(e);
+
+		this.getListDatas(recipes);
 		
 		this.recipeCard = new RecipeCard(recipes);
-		this.getListDatas(recipes);
+		
 		this.bindEvent();
 	}
 
@@ -82,14 +85,14 @@ export class Search {
 		}
 		this.clearCardsAndDropdowns();
 		if (this.searchResultArray.length === 0 && this.searchByTagArray.length === 0){
-			
 			this.getDatasByIngredients(recipes, tagsList, this.searchByTagArray);
 			this.getDatasByAppliance(recipes, tagsList, this.searchByTagArray);
 			this.getDatasByUtensils(recipes, tagsList, this.searchByTagArray);
 			
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-		} else if (this.searchResultArray.length  > 0){
+			this.getListDatas(this.searchByTagArray, tag);
+
+		} else if (this.searchResultArray.length  > 0 && this.searchByTagArray.length === 0){
 			console.log(this.searchResultArray);
 			localStorage.setItem('searchResult', JSON.stringify(this.searchResultArray));
 			this.searchByTagArray = [];
@@ -103,6 +106,21 @@ export class Search {
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray);
 			localStorage.clear();
+
+		} else if (this.searchResultArray.length  > 0 && this.searchByTagArray.length > 0){
+			localStorage.setItem('resultByTag', JSON.stringify(this.searchByTagArray));
+			this.searchByTagArray = [];
+			let data = localStorage.getItem('resultByTag');
+			data = JSON.parse(data);
+			
+			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
+			this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
+			this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
+			
+			this.recipeCard.displayAllRecipes(this.searchByTagArray);
+			this.getListDatas(this.searchByTagArray);
+			localStorage.clear();
+
 		} else if (this.searchResultArray.length === 0 && this.searchByTagArray.length > 0) {
 			
 			localStorage.setItem('resultByTag', JSON.stringify(this.searchByTagArray));
@@ -133,7 +151,7 @@ export class Search {
 	getDataResult(e, recipes) {
 		this.searchResultArray = [];
 		recipes.forEach(recipe => {
-			if(recipe.name.toLowerCase().includes(e.target.value) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(e.target.value)) || recipe.description.toLowerCase().includes(e.target.value)){
+			if(recipe.name.toLowerCase().includes(e.target.value.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(e.target.value.toLowerCase())) || recipe.description.toLowerCase().includes(e.target.value.toLowerCase())){
 				if(!this.searchResultArray.includes(recipe)) {
 					this.searchResultArray.push(recipe);
 				}
@@ -169,7 +187,6 @@ export class Search {
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray);
 		}
-		console.log(this.searchResultArray);
 	}
 
 	capitalizeFirstLetter(string) {
@@ -186,6 +203,7 @@ export class Search {
 				this.list.push(item.textContent.toLowerCase());
 			}
 		}
+
 		// Clear dropdown
 		if (typeof(e) !== 'undefined') {
 			this.clearList(e.target.parentElement.parentElement.lastChild.previousElementSibling);
@@ -292,23 +310,34 @@ export class Search {
 	_getItemClicked(e) {
 		let item = e.target;
 		let backgroundColor = window.getComputedStyle(item.parentElement.parentElement).backgroundColor;
+		let array = [...this.tags];
+		let tags = array.map(tag => tag.textContent);
+		let cleanItem = item.textContent.replace(/\s/g, '');
+		let cleanArray = tags.map(e => e.replace(/\s+/g, ''));
 		
-		if(item.parentElement.parentElement.id === 'ingredients-list'){
+		if(item.parentElement.parentElement.classList.contains('small-size')){
+			item.parentElement.parentElement.classList.remove('small-size');
+			item.parentElement.parentElement.parentElement.classList.remove('small-size-container');
+			item.parentElement.parentElement.parentElement.classList.add('large-size');
+		}
+		
+		if(item.parentElement.parentElement.id === 'ingredients-list' && !cleanArray.includes(cleanItem)){
 			this.displayTag(item.textContent, backgroundColor, 'js-ingredient-tag');
 			this.getResultByTag(item.textContent, this.tagsIngredientsList);
-		} else if((item.parentElement.parentElement.id === 'appliances-list')){
+		} else if((item.parentElement.parentElement.id === 'appliances-list') && !cleanArray.includes(cleanItem)){
 			this.displayTag(item.textContent, backgroundColor, 'js-appliance-tag');
 			this.getResultByTag(item.textContent, this.tagsAppliancesList);
-		} else if((item.parentElement.parentElement.id === 'utensils-list')) {
+		} else if((item.parentElement.parentElement.id === 'utensils-list') && !cleanArray.includes(cleanItem)) {
 			this.displayTag(item.textContent, backgroundColor, 'js-utensil-tag');
 			this.getResultByTag(item.textContent, this.tagsUtensilsList);
+		} else {
+			item.classList.add('selected');
 		}
 	}
 
 	getDatasClosingTag(recipes) {
 		this.tagsIngredientsList = this.tagsIngredientsList.map(tag => tag.toLowerCase());
 		this.tagsUtensilsList = this.tagsUtensilsList.map(tag => tag.toLowerCase());
-		
 
 		if(this.tagsIngredientsList.length > 0 && this.tagsAppliancesList.length > 0 && this.tagsUtensilsList.length > 0){
 			recipes.filter(recipe => {
@@ -414,7 +443,6 @@ export class Search {
 		}
 	}
 
-	// Create list item
 	createListItem(data, wrapper) {
 		const item = document.createElement('li');
 		item.classList.add('search__dropdown-menu-link');
@@ -424,14 +452,11 @@ export class Search {
 		return item;
 	}
 
-	isValidItem(list, listWrapper, item) {
+	isValidItem(list, item) {
 		if(!list.includes(item)){
 			list.push(item);
-			this.createListItem(item, listWrapper);
 		}
-		for(const element of this.listItems) {
-			element.addEventListener('click', this.getItemClicked);
-		}
+		list.sort();
 	}
 
 	getListDatas(recipes) {
@@ -443,25 +468,37 @@ export class Search {
 			case 'ingredients':
 				recipes.forEach(recipe => {
 					recipe.ingredients.forEach(ingredient => {
-						this.isValidItem(this.ingredientsList, listWrapper, ingredient.ingredient);
+						this.isValidItem(this.ingredientsList, ingredient.ingredient);
 					});
 				});
+				for(let ingredient of this.ingredientsList){
+					this.createListItem(ingredient, listWrapper);
+				}
 				this.ingredientsList = [];
 				break;
 			case 'appliances':
 				recipes.forEach(recipe => {
-					this.isValidItem(this.appliancesList, listWrapper, recipe.appliance);
+					this.isValidItem(this.appliancesList, recipe.appliance);
 				});
+				for(let appliance of this.appliancesList){
+					this.createListItem(appliance, listWrapper);
+				}
 				this.appliancesList = [];
 				break;
 			case 'utensils':
 				recipes.forEach(recipe => {
 					recipe.ustensils.forEach(ustensil => {
-						this.isValidItem(this.utensilsList, listWrapper, ustensil);
+						this.isValidItem(this.utensilsList, ustensil);
 					});
 				});
+				for(let utensil of this.utensilsList){
+					this.createListItem(utensil, listWrapper);
+				}
 				this.utensilsList = [];
 				break;
+			}
+			for(const element of this.listItems) {
+				element.addEventListener('click', this.getItemClicked);
 			}
 		}
 	}

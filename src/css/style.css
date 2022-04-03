@@ -264,14 +264,19 @@ table {
   margin-top: 20px;
 }
 .search__dropdown-menu-link {
+  cursor: pointer;
   width: 48%;
 }
 @media (min-width: 1380px) {
   .search__dropdown-menu-link {
-    cursor: pointer;
     width: 26%;
     font-size: 18px;
+    margin-bottom: 5px;
   }
+}
+.search__dropdown-menu-link:hover {
+  text-decoration: underline;
+  font-size: 20px;
 }
 
 .fa-search:before {
@@ -287,11 +292,21 @@ table {
 }
 
 .small-size {
-  width: 170px;
+  width: 100%;
+}
+@media (min-width: 1380px) {
+  .small-size {
+    width: 170px;
+  }
 }
 
 .small-size-container {
-  width: 210px;
+  width: 100%;
+}
+@media (min-width: 1380px) {
+  .small-size-container {
+    width: 210px;
+  }
 }
 
 .large-size {
@@ -321,6 +336,15 @@ table {
 
 .full-size {
   width: 100%;
+}
+
+.selected {
+  text-decoration: line-through;
+}
+
+.selected:hover {
+  font-size: 18px;
+  text-decoration: line-through;
 }
 
 .tags {

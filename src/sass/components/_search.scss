@@ -158,12 +158,18 @@
         margin-top: 20px;
     }
     &__dropdown-menu-link {
+        cursor: pointer;
         width: 48%;
         @include breakpoint-large {
-            cursor: pointer;
+            
             width: 26%;
             font-size: 18px;
+            margin-bottom: 5px;
         }
+    }
+    &__dropdown-menu-link:hover {
+        text-decoration: underline;
+        font-size: 20px;
     }
 }
 
@@ -180,11 +186,17 @@
 }
 
 .small-size {
+    width: 100%;
+    @include breakpoint-large {
     width: 170px;
+    }
 }
 
 .small-size-container {
-    width: 210px;
+    width: 100%;
+    @include breakpoint-large {
+        width: 210px;
+    }
 }
 
 .large-size {
@@ -212,4 +224,13 @@
 
 .full-size {
     width: 100%;
+}
+
+.selected {
+    text-decoration: line-through;
+}
+
+.selected:hover {
+    font-size: 18px;
+    text-decoration: line-through;
 }
