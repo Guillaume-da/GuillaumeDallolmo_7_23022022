@@ -169,6 +169,7 @@ export class Search {
 
 	_getResult(e) {	
 		if(e.target.value.length === 0 && this.searchByTagArray.length === 0) {
+			this.searchResultArray = [];
 			this.clearCardsAndDropdowns();
 			this.recipeCard.displayAllRecipes(recipes);
 			this.getListDatas(recipes);
@@ -333,6 +334,7 @@ export class Search {
 		} else {
 			item.classList.add('selected');
 		}
+		console.log(this.searchByTagArray);
 	}
 
 	getDatasClosingTag(recipes) {
@@ -397,6 +399,7 @@ export class Search {
 				}
 			});
 		}
+		console.log(this.searchByTagArray);
 	}
 
 	_closeTag(e) {
