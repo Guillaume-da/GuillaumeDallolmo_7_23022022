@@ -171,11 +171,14 @@ export class Search {
 			this.clearCardsAndDropdowns();
 			this.recipeCard.displayAllRecipes(recipes);
 			this.getListDatas(recipes);
+			console.log(this.searchResultArray);
 		}
 		if(e.target.value.length >= 3 && this.searchByTagArray.length === 0) {
+			
 			this.getDataResult(e, recipes);
 				
 		} else if(e.target.value.length >= 3 && this.searchByTagArray.length > 0) {
+			
 			this.getDataResult(e, this.searchByTagArray);
 		} else if (e.target.value.length < 3 && this.searchByTagArray.length === 0) {
 			this.clearCardsAndDropdowns();
@@ -398,6 +401,8 @@ export class Search {
 					}
 				}
 			});
+		} else if(this.tagsIngredientsList.length === 0 && this.tagsAppliancesList.length === 0 && this.tagsUtensilsList.length === 0){
+			this.searchByTagArray = [];
 		}
 	}
 
@@ -443,8 +448,6 @@ export class Search {
 			item.parentElement.remove();
 			this.searchByTagArray = [];
 		}
-		// console.log(this.searchResultArray);
-		// console.log(this.searchByTagArray);
 	}
 
 	createListItem(data, wrapper) {
