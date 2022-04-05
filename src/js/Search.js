@@ -4,7 +4,6 @@ import { RecipeCard } from './factories/RecipeCard.js';
 
 export class Search {
 	constructor() {
-		console.log('search constructor');
 		this.tagsIngredientsList = [];
 		this.tagsAppliancesList = [];
 		this.searchResultArray = [];
@@ -22,8 +21,8 @@ export class Search {
 		
 		this.listContainers = document.getElementsByClassName('js-wrapper');
 		this.searchInput = document.getElementsByClassName('search__input')[0];
-		this.articles = document.getElementsByClassName('recipes__item');
-		this.articlesArray = Array.prototype.slice.call( this.articles, 0 );
+		// this.articles = document.getElementsByClassName('recipes__item');
+		// this.articlesArray = Array.prototype.slice.call( this.articles, 0 );
 		this.recipesWrapper = document.querySelector('.recipes');
 		this.listContainers = document.getElementsByClassName('search__dropdown-menu-list');
 		this.listItems = document.getElementsByClassName('search__dropdown-menu-link');
@@ -93,7 +92,6 @@ export class Search {
 			this.getListDatas(this.searchByTagArray, tag);
 
 		} else if (this.searchResultArray.length  > 0 && this.searchByTagArray.length === 0){
-			console.log(this.searchResultArray);
 			localStorage.setItem('searchResult', JSON.stringify(this.searchResultArray));
 			this.searchByTagArray = [];
 			let data = localStorage.getItem('searchResult');
@@ -150,13 +148,13 @@ export class Search {
 
 	getDataResult(e, recipes) {
 		this.searchResultArray = [];
-		recipes.forEach(recipe => {
-			if(recipe.name.toLowerCase().includes(e.target.value.toLowerCase()) || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(e.target.value.toLowerCase())) || recipe.description.toLowerCase().includes(e.target.value.toLowerCase())){
+		for(let recipe of recipes) {
+			if(recipe.name.toLowerCase().includes(e.target.value) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(e.target.value)) || recipe.description.toLowerCase().includes(e.target.value)){
 				if(!this.searchResultArray.includes(recipe)) {
 					this.searchResultArray.push(recipe);
 				}
 			}
-		});
+		}
 		this.clearCardsAndDropdowns();
 			
 		if(this.searchResultArray.length === 0){
@@ -321,10 +319,13 @@ export class Search {
 			item.parentElement.parentElement.parentElement.classList.remove('small-size-container');
 			item.parentElement.parentElement.parentElement.classList.add('large-size');
 		}
-		
+
+		// clean search input when selecting a tag 
+		item.parentElement.previousElementSibling.firstChild.nextElementSibling.value = '';
+
 		if(item.parentElement.parentElement.id === 'ingredients-list' && !cleanArray.includes(cleanItem)){
 			this.displayTag(item.textContent, backgroundColor, 'js-ingredient-tag');
-			this.getResultByTag(item.textContent, this.tagsIngredientsList);
+			this.getResultByTag(item.textContent, this.tagsIngredientsList);	
 		} else if((item.parentElement.parentElement.id === 'appliances-list') && !cleanArray.includes(cleanItem)){
 			this.displayTag(item.textContent, backgroundColor, 'js-appliance-tag');
 			this.getResultByTag(item.textContent, this.tagsAppliancesList);
@@ -334,7 +335,6 @@ export class Search {
 		} else {
 			item.classList.add('selected');
 		}
-		console.log(this.searchByTagArray);
 	}
 
 	getDatasClosingTag(recipes) {
@@ -399,7 +399,6 @@ export class Search {
 				}
 			});
 		}
-		console.log(this.searchByTagArray);
 	}
 
 	_closeTag(e) {
@@ -444,6 +443,8 @@ export class Search {
 			item.parentElement.remove();
 			this.searchByTagArray = [];
 		}
+		// console.log(this.searchResultArray);
+		// console.log(this.searchByTagArray);
 	}
 
 	createListItem(data, wrapper) {
