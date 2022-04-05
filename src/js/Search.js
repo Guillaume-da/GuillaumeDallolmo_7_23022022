@@ -132,13 +132,13 @@ export class Search {
 
 	getDataResult(e, recipes) {
 		this.searchResultArray = [];
-		for(let recipe of recipes) {
+		recipes.forEach(recipe => {
 			if(recipe.name.toLowerCase().includes(e.target.value) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(e.target.value)) || recipe.description.toLowerCase().includes(e.target.value)){
 				if(!this.searchResultArray.includes(recipe)) {
 					this.searchResultArray.push(recipe);
 				}
 			}
-		}
+		});
 		this.clearCardsAndDropdowns();
 			
 		if(this.searchResultArray.length === 0){
