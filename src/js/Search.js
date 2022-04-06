@@ -78,28 +78,44 @@ export class Search {
 	}
 
 	getResultByTag(tag, tagsList) {
+		// console.log('Get result by tag', this.searchResultArray);
 		localStorage.clear();
 		if(tag) {
 			tagsList.push(tag.toLowerCase());
 		}
 		this.clearCardsAndDropdowns();
+		
 		if (this.searchResultArray.length === 0 && this.searchByTagArray.length === 0){
-			this.getDatasByIngredients(recipes, tagsList, this.searchByTagArray);
-			this.getDatasByAppliance(recipes, tagsList, this.searchByTagArray);
-			this.getDatasByUtensils(recipes, tagsList, this.searchByTagArray);
+			if(tagsList === this.tagsIngredientsList){
+				this.getDatasByIngredients(recipes, tagsList, this.searchByTagArray);
+			} else if(tagsList === this.tagsAppliancesList){
+				this.getDatasByAppliance(recipes, tagsList, this.searchByTagArray);
+			} else if(tagsList === this.tagsUtensilsList){
+				this.getDatasByUtensils(recipes, tagsList, this.searchByTagArray);
+			}
 			
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray, tag);
+			// console.log(this.searchByTagArray);
 
 		} else if (this.searchResultArray.length  > 0 && this.searchByTagArray.length === 0){
 			localStorage.setItem('searchResult', JSON.stringify(this.searchResultArray));
-			this.searchByTagArray = [];
+			
 			let data = localStorage.getItem('searchResult');
 			data = JSON.parse(data);
+			// console.log(data);
+			this.searchByTagArray = [];
+			if(tagsList === this.tagsIngredientsList){
+				this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
+			} else if(tagsList === this.tagsAppliancesList){
+				this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
+			} else if(tagsList === this.tagsUtensilsList){
+				this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
+			}
 			
-			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
-			this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
-			this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
+			// this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
+			// this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
+			// this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
 			
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray);
@@ -110,14 +126,20 @@ export class Search {
 			this.searchByTagArray = [];
 			let data = localStorage.getItem('resultByTag');
 			data = JSON.parse(data);
-			
-			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
-			this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
-			this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
+			// console.log(data);
+
+			if(tagsList === this.tagsIngredientsList){
+				this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
+			} else if(tagsList === this.tagsAppliancesList){
+				this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
+			} else if(tagsList === this.tagsUtensilsList){
+				this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
+			}
+			// console.log(this.searchByTagArray);
 			
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray);
-			localStorage.clear();
+			// localStorage.clear();
 
 		} else if (this.searchResultArray.length === 0 && this.searchByTagArray.length > 0) {
 			
@@ -126,10 +148,15 @@ export class Search {
 			let data = localStorage.getItem('resultByTag');
 			data = JSON.parse(data);
 			
-			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
-			this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
-			this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
-			
+
+			if(tagsList === this.tagsIngredientsList){
+				this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
+			} else if(tagsList === this.tagsAppliancesList){
+				this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
+			} else if(tagsList === this.tagsUtensilsList){
+				this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
+			}
+			// console.log(this.searchByTagArray);
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray);
 			localStorage.clear();
@@ -171,14 +198,16 @@ export class Search {
 			this.clearCardsAndDropdowns();
 			this.recipeCard.displayAllRecipes(recipes);
 			this.getListDatas(recipes);
-			console.log(this.searchResultArray);
+			// console.log(this.searchResultArray);
 		}
 		if(e.target.value.length >= 3 && this.searchByTagArray.length === 0) {
 			
 			this.getDataResult(e, recipes);
-				
+			// console.log('searchResult', this.searchResultArray);
+			// console.log('searchByTag', this.searchByTagArray);
 		} else if(e.target.value.length >= 3 && this.searchByTagArray.length > 0) {
-			
+			this.searchByTagArray = [];
+			// console.log('Recherche par tag', this.searchByTagArray);
 			this.getDataResult(e, this.searchByTagArray);
 		} else if (e.target.value.length < 3 && this.searchByTagArray.length === 0) {
 			this.clearCardsAndDropdowns();
@@ -436,17 +465,24 @@ export class Search {
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray);
 			item.parentElement.remove();
+			// console.log(this.searchByTagArray);
 			
 		} else if (this.searchResultArray.length > 0){
 			this.getDatasClosingTag(this.searchResultArray);
 			if(this.tagsIngredientsList.length === 0 && this.tagsAppliancesList.length === 0 && this.tagsUtensilsList.length === 0){
-				this.searchByTagArray = this.searchResultArray;
+				this.clearCardsAndDropdowns();
+				this.recipeCard.displayAllRecipes(this.searchResultArray);
+				this.getListDatas(this.searchResultArray);
+				this.searchByTagArray = [];
+				
+			} else if (this.tagsIngredientsList.length > 0 || this.tagsAppliancesList.length > 0 || this.tagsUtensilsList.length > 0) {
+				this.clearCardsAndDropdowns();
+				this.recipeCard.displayAllRecipes(this.searchByTagArray);
+				this.getListDatas(this.searchByTagArray);
 			}
-			this.clearCardsAndDropdowns();
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
+			
 			item.parentElement.remove();
-			this.searchByTagArray = [];
+			
 		}
 	}
 
