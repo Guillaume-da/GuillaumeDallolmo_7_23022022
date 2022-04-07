@@ -137,7 +137,7 @@ export class Search {
 	getDataResult(e, recipes) {
 		this.searchResultArray = [];
 		recipes.forEach(recipe => {
-			if(recipe.name.toLowerCase().includes(e.target.value) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(e.target.value)) || recipe.description.toLowerCase().includes(e.target.value)){
+			if(recipe.name.toLowerCase().includes(e.target.value) || recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(e.target.value.toLowerCase())) || recipe.description.toLowerCase().includes(e.target.value)){
 				if(!this.searchResultArray.includes(recipe)) {
 					this.searchResultArray.push(recipe);
 				}
