@@ -21,8 +21,6 @@ export class Search {
 		
 		this.listContainers = document.getElementsByClassName('js-wrapper');
 		this.searchInput = document.getElementsByClassName('search__input')[0];
-		// this.articles = document.getElementsByClassName('recipes__item');
-		// this.articlesArray = Array.prototype.slice.call( this.articles, 0 );
 		this.recipesWrapper = document.querySelector('.recipes');
 		this.listContainers = document.getElementsByClassName('search__dropdown-menu-list');
 		this.listItems = document.getElementsByClassName('search__dropdown-menu-link');
@@ -77,62 +75,52 @@ export class Search {
 		});
 	}
 
+	getTagResult(data, tagsList) {
+		if(tagsList === this.tagsIngredientsList){
+			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
+		} else if(tagsList === this.tagsAppliancesList){
+			this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
+		} else if(tagsList === this.tagsUtensilsList){
+			this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
+		}
+	}
+
+	setLocalstorage(name, array) {
+		localStorage.setItem(name, JSON.stringify(array));
+		this.searchByTagArray = [];
+	}
+
+	displayResultByTag(name, array, tagsList) {
+		this.setLocalstorage(name, array);
+		let data = localStorage.getItem(name);
+		data = JSON.parse(data);
+		this.getTagResult(data, tagsList);
+		this.recipeCard.displayAllRecipes(this.searchByTagArray);
+		this.getListDatas(this.searchByTagArray);
+		localStorage.clear();
+	}
+
 	getResultByTag(tag, tagsList) {
 		localStorage.clear();
 		if(tag) {
 			tagsList.push(tag.toLowerCase());
 		}
 		this.clearCardsAndDropdowns();
+		
 		if (this.searchResultArray.length === 0 && this.searchByTagArray.length === 0){
-			this.getDatasByIngredients(recipes, tagsList, this.searchByTagArray);
-			this.getDatasByAppliance(recipes, tagsList, this.searchByTagArray);
-			this.getDatasByUtensils(recipes, tagsList, this.searchByTagArray);
+			this.getTagResult(recipes, tagsList);
 			
 			this.recipeCard.displayAllRecipes(this.searchByTagArray);
 			this.getListDatas(this.searchByTagArray, tag);
 
 		} else if (this.searchResultArray.length  > 0 && this.searchByTagArray.length === 0){
-			localStorage.setItem('searchResult', JSON.stringify(this.searchResultArray));
-			this.searchByTagArray = [];
-			let data = localStorage.getItem('searchResult');
-			data = JSON.parse(data);
-			
-			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
-			this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
-			this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-			localStorage.clear();
+			this.displayResultByTag('searchResult', this.searchResultArray, tagsList);
 
 		} else if (this.searchResultArray.length  > 0 && this.searchByTagArray.length > 0){
-			localStorage.setItem('resultByTag', JSON.stringify(this.searchByTagArray));
-			this.searchByTagArray = [];
-			let data = localStorage.getItem('resultByTag');
-			data = JSON.parse(data);
-			
-			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
-			this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
-			this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-			localStorage.clear();
+			this.displayResultByTag('resultByTag', this.searchByTagArray, tagsList);
 
 		} else if (this.searchResultArray.length === 0 && this.searchByTagArray.length > 0) {
-			
-			localStorage.setItem('resultByTag', JSON.stringify(this.searchByTagArray));
-			this.searchByTagArray = [];
-			let data = localStorage.getItem('resultByTag');
-			data = JSON.parse(data);
-			
-			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
-			this.getDatasByAppliance(data, tagsList, this.searchByTagArray);
-			this.getDatasByUtensils(data, tagsList, this.searchByTagArray);
-			
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-			localStorage.clear();
+			this.displayResultByTag('resultByTag', this.searchByTagArray, tagsList);
 		}
 	}
 	
@@ -165,29 +153,31 @@ export class Search {
 		this.getListDatas(this.searchResultArray);
 	}
 
+	updateResult(recipes) {
+		this.clearCardsAndDropdowns();
+		this.recipeCard.displayAllRecipes(recipes);
+		this.getListDatas(recipes);
+	}
+
 	_getResult(e) {	
 		if(e.target.value.length === 0 && this.searchByTagArray.length === 0) {
 			this.searchResultArray = [];
 			this.clearCardsAndDropdowns();
 			this.recipeCard.displayAllRecipes(recipes);
 			this.getListDatas(recipes);
-			console.log(this.searchResultArray);
+			for(let tag of this.tags){
+				tag.remove();
+			}
 		}
 		if(e.target.value.length >= 3 && this.searchByTagArray.length === 0) {
-			
 			this.getDataResult(e, recipes);
-				
-		} else if(e.target.value.length >= 3 && this.searchByTagArray.length > 0) {
 			
+		} else if(e.target.value.length >= 3 && this.searchByTagArray.length > 0) {
 			this.getDataResult(e, this.searchByTagArray);
 		} else if (e.target.value.length < 3 && this.searchByTagArray.length === 0) {
-			this.clearCardsAndDropdowns();
-			this.recipeCard.displayAllRecipes(recipes);
-			this.getListDatas(recipes);
+			this.updateResult(recipes);
 		} else if (e.target.value.length < 3 && this.searchByTagArray.length > 0) {
-			this.clearCardsAndDropdowns();
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
+			this.updateResult(this.searchByTagArray);
 		}
 	}
 
@@ -344,7 +334,10 @@ export class Search {
 		this.tagsIngredientsList = this.tagsIngredientsList.map(tag => tag.toLowerCase());
 		this.tagsUtensilsList = this.tagsUtensilsList.map(tag => tag.toLowerCase());
 
-		if(this.tagsIngredientsList.length > 0 && this.tagsAppliancesList.length > 0 && this.tagsUtensilsList.length > 0){
+		if(this.tagsIngredientsList.length === 0 && this.tagsAppliancesList.length === 0 && this.tagsUtensilsList.length === 0){
+			this.searchByTagArray = [];
+		}
+		else if(this.tagsIngredientsList.length > 0 && this.tagsAppliancesList.length > 0 && this.tagsUtensilsList.length > 0){
 			recipes.filter(recipe => {
 				if(this.tagsIngredientsList.every(r => recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()).map(e => e.replace(/\s+/g, '')).includes(r)) && this.tagsAppliancesList.includes(recipe.appliance.toLowerCase().replace(/\s+/g, '')) && this.tagsUtensilsList.every(r => recipe.ustensils.map(ustensil => ustensil.toLowerCase()).map(e => e.replace(/\s+/g, '')).includes(r))) {
 					if(!this.searchByTagArray.includes(recipe)) {
@@ -401,8 +394,6 @@ export class Search {
 					}
 				}
 			});
-		} else if(this.tagsIngredientsList.length === 0 && this.tagsAppliancesList.length === 0 && this.tagsUtensilsList.length === 0){
-			this.searchByTagArray = [];
 		}
 	}
 
@@ -430,23 +421,25 @@ export class Search {
 		if (this.searchResultArray.length === 0){
 			this.getDatasClosingTag(recipes);
 			if(this.tagsIngredientsList.length === 0 && this.tagsAppliancesList.length === 0 && this.tagsUtensilsList.length === 0){
-				this.searchByTagArray = recipes;
+				this.updateResult(recipes);
+				item.parentElement.remove();
+			} else {
+				this.updateResult(this.searchByTagArray);
+				item.parentElement.remove();
 			}
-			this.clearCardsAndDropdowns();
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
-			item.parentElement.remove();
+			
 			
 		} else if (this.searchResultArray.length > 0){
 			this.getDatasClosingTag(this.searchResultArray);
 			if(this.tagsIngredientsList.length === 0 && this.tagsAppliancesList.length === 0 && this.tagsUtensilsList.length === 0){
-				this.searchByTagArray = this.searchResultArray;
+				this.updateResult(this.searchResultArray);
+				this.searchByTagArray = [];
+				
+			} else if (this.tagsIngredientsList.length > 0 || this.tagsAppliancesList.length > 0 || this.tagsUtensilsList.length > 0) {
+				this.updateResult(this.searchByTagArray);
 			}
-			this.clearCardsAndDropdowns();
-			this.recipeCard.displayAllRecipes(this.searchByTagArray);
-			this.getListDatas(this.searchByTagArray);
+			
 			item.parentElement.remove();
-			this.searchByTagArray = [];
 		}
 	}
 
