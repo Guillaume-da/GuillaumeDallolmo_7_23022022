@@ -161,9 +161,16 @@ export class Search {
 	getDataResult(e, recipes) {
 		this.searchResultArray = [];
 		for(let recipe of recipes) {
-			if(recipe.name.toLowerCase().includes(e.target.value) || recipe.ingredients.some(ingredient => ingredient.ingredient.includes(e.target.value)) || recipe.description.toLowerCase().includes(e.target.value)){
+			if(recipe.name.toLowerCase().includes(e.target.value) || recipe.description.toLowerCase().includes(e.target.value)){
 				if(!this.searchResultArray.includes(recipe)) {
 					this.searchResultArray.push(recipe);
+				}
+				for (let ingredient of recipe.ingredients) {
+					if (ingredient.ingredient.includes(e.target.value)) {
+						if(!this.searchResultArray.includes(recipe)) {
+							this.searchResultArray.push(recipe);
+						}
+					}
 				}
 			}
 		}
