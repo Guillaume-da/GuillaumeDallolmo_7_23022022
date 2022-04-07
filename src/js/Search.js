@@ -141,11 +141,11 @@ export class Search {
 				if(!this.searchResultArray.includes(recipe)) {
 					this.searchResultArray.push(recipe);
 				}
-				for (let ingredient of recipe.ingredients) {
-					if (ingredient.ingredient.toLowerCase().replace(/\s+/g, '').includes(e.target.value.toLowerCase().replace(/\s+/g, ''))) {
-						if(!this.searchResultArray.includes(recipe)) {
-							this.searchResultArray.push(recipe);
-						}
+			}
+			for (let ingredient of recipe.ingredients) {
+				if (ingredient.ingredient.toLowerCase().includes(e.target.value.toLowerCase())) {
+					if(!this.searchResultArray.includes(recipe)) {
+						this.searchResultArray.push(recipe);
 					}
 				}
 			}
