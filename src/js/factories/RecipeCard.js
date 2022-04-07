@@ -3,7 +3,6 @@ export class RecipeCard {
 		this.wrapper = document.querySelector('.recipes');
 
 		this.displayAllRecipes(recipes);
-		console.log('recipeCards constructor');
 	}
 
 	createRecipeCard(data) {
