@@ -201,7 +201,7 @@ table {
 }
 @media (min-width: 1380px) {
   .search__dropdown-menu {
-    width: 676px;
+    width: 946px;
   }
 }
 .search__dropdown-menu-header {
@@ -252,8 +252,8 @@ table {
   }
 }
 .search__dropdown-menu-list {
+  column-gap: 33px;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   color: white;
   font-family: "Lato", sans-serif;
@@ -269,7 +269,7 @@ table {
 }
 @media (min-width: 1380px) {
   .search__dropdown-menu-link {
-    width: 26%;
+    width: 31%;
     font-size: 18px;
     margin-bottom: 5px;
   }
@@ -314,7 +314,7 @@ table {
 }
 @media (min-width: 1380px) {
   .large-size {
-    width: 715px;
+    width: 985px;
   }
 }
 
