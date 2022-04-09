@@ -85,7 +85,7 @@ const recipes = [
 				"unit" : "ml"
 			},
 			{
-				"ingredient": "Coulis de tomates",
+				"ingredient": "Coulis de tomate",
 				"quantity" : 25,
 				"unit" : "cl"
 			},
@@ -368,7 +368,7 @@ const recipes = [
 		"servings": 4,
 		"ingredients":[
 			{
-				"ingredient": "Tomates cerises",
+				"ingredient": "Tomate cerises",
 				"quantity": 250,
 				"unit": "grammes"
 			},
@@ -383,7 +383,7 @@ const recipes = [
 				"unit": "tranches"
 			}, 
 			{
-				"ingredient": "Pommes",
+				"ingredient": "Pomme",
 				"quantity": 1
 			},
 			{
@@ -411,7 +411,7 @@ const recipes = [
 				"unit": "grammes"
 			},
 			{
-				"ingredient": "Pommes",
+				"ingredient": "Pomme",
 				"quantity": 8
 			},
 			{
@@ -722,7 +722,7 @@ const recipes = [
 				"quantity": 2
 			},
 			{
-				"ingredient": "Coulis de tomates",
+				"ingredient": "Coulis de tomate",
 				"quantity": 300,
 				"unit":"grammes"
 			},
@@ -1292,7 +1292,7 @@ const recipes = [
 				"quantity": 1
 			},
 			{
-				"ingredient": "Coulis de tomates",
+				"ingredient": "Coulis de tomate",
 				"quantity": 20,
 				"unit": "cl"
 			},
@@ -1304,7 +1304,7 @@ const recipes = [
             
 		],
 		"time": 60,
-		"description":"Couper les courgettes dans le sens de la longueur. Vider les courgette dans un saladier. Réserver.Faire revenir la chair des courgettes dans 25cl d'huile d'olive. Ajouter l'oignon puis la viande hachée. Mettre la farce dans les courgettes. Ajouter le coulis de tomates. Mettre au four pendant 30 minutes. Avant la fin de la cuisson ajouter le fromage rapé",
+		"description":"Couper les courgettes dans le sens de la longueur. Vider les courgette dans un saladier. Réserver.Faire revenir la chair des courgettes dans 25cl d'huile d'olive. Ajouter l'oignon puis la viande hachée. Mettre la farce dans les courgettes. Ajouter le coulis de tomate. Mettre au four pendant 30 minutes. Avant la fin de la cuisson ajouter le fromage rapé",
 		"appliance": "Four",
 		"ustensils":["couteau", "cuillère en bois", "poelle à frire"]
 	},
