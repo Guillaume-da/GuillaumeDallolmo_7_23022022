@@ -456,7 +456,9 @@ export class Search {
 		if(!list.includes(item)){
 			list.push(item);
 		}
-		list.sort();
+		list.sort((a, b) =>{
+			return a.localeCompare(b);
+		});
 	}
 
 	getListDatas(recipes) {
