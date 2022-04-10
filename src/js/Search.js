@@ -78,7 +78,7 @@ export class Search {
 		});
 	}
 
-	// Get search type then search
+	// Get search tag type then search
 	getTagResult(data, tagsList) {
 		if(tagsList === this.tagsIngredientsList){
 			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
@@ -475,6 +475,7 @@ export class Search {
 	}
 
 	// Get all ingredients, appliances, utensils used in recipes
+	// Display dropdowns lists
 	getListDatas(recipes) {
 		for(let listContainer of this.listContainers) {
 			const listWrapper = listContainer.parentElement.lastChild.previousSibling;
