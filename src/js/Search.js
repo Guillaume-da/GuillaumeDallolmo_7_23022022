@@ -45,6 +45,7 @@ export class Search {
 		this.bindEvent();
 	}
 
+	// Search for ingredient
 	getDatasByIngredients(datas, tags, array) {
 		datas.filter(recipe => {		
 			if(tags.map(tag => tag.toLowerCase()).every(r => recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()).includes(r))) {
@@ -55,6 +56,7 @@ export class Search {
 		});
 	}
 
+	// Search for appliance
 	getDatasByAppliance(datas, tags, array) {
 		datas.filter(recipe => {
 			if(tags.map(tag => tag.toLowerCase()).every(r => recipe.appliance.toLowerCase().includes(r))) {
@@ -65,6 +67,7 @@ export class Search {
 		});
 	}
 
+	// Search for utensil
 	getDatasByUtensils(datas, tags, array) {
 		datas.filter(recipe => {
 			if(tags.map(tag => tag.toLowerCase()).every(r => recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(r))) {
@@ -75,6 +78,7 @@ export class Search {
 		});
 	}
 
+	// Get search tag type then search
 	getTagResult(data, tagsList) {
 		if(tagsList === this.tagsIngredientsList){
 			this.getDatasByIngredients(data, tagsList, this.searchByTagArray);
@@ -90,6 +94,7 @@ export class Search {
 		this.searchByTagArray = [];
 	}
 
+	// Get result by tag and display result
 	displayResultByTag(name, array, tagsList) {
 		this.setLocalstorage(name, array);
 		let data = localStorage.getItem(name);
@@ -124,6 +129,7 @@ export class Search {
 		}
 	}
 	
+	// Insert a message if no result
 	insertMessage() {
 		const paragraph = document.createElement('div');
 		paragraph.classList.add('recipes__no-result-message');
@@ -134,6 +140,7 @@ export class Search {
 		return paragraph;
 	}
 
+	// Search input text in recipes name, recipes ingredients and recipes description
 	getDataResult(e, recipes) {
 		this.searchResultArray = [];
 		for(let recipe of recipes) {
@@ -166,6 +173,7 @@ export class Search {
 		this.getListDatas(recipes);
 	}
 
+	// Search by word
 	_getResult(e) {	
 		if(e.target.value.length === 0 && this.searchByTagArray.length === 0) {
 			this.searchResultArray = [];
@@ -192,6 +200,7 @@ export class Search {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
+	// Update dropddowns lists when searching
 	_updateDropdownListWhenInput(e) {
 
 		// Get list iems in dropdown, put items in this.list
@@ -306,6 +315,7 @@ export class Search {
 		}
 	} 
 
+	// Get tag clicked, display tag and get result by tag
 	_getItemClicked(e) {
 		let item = e.target;
 		let backgroundColor = window.getComputedStyle(item.parentElement.parentElement).backgroundColor;
@@ -337,6 +347,7 @@ export class Search {
 		}
 	}
 
+	// Filtering result when closing tag
 	getDatasClosingTag(recipes) {
 		this.tagsIngredientsList = this.tagsIngredientsList.map(tag => tag.toLowerCase());
 		this.tagsUtensilsList = this.tagsUtensilsList.map(tag => tag.toLowerCase());
@@ -450,6 +461,7 @@ export class Search {
 		}
 	}
 
+	// Create a li element in dropddown
 	createListItem(data, wrapper) {
 		const item = document.createElement('li');
 		item.classList.add('search__dropdown-menu-link');
@@ -468,6 +480,8 @@ export class Search {
 		});
 	}
 
+	// Get all ingredients, appliances, utensils used in recipes
+	// Display dropdowns lists
 	getListDatas(recipes) {
 		for(let listContainer of this.listContainers) {
 			const listWrapper = listContainer.parentElement.lastChild.previousSibling;
