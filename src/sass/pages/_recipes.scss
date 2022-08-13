@@ -21,6 +21,8 @@
     &__image {
         width: 100%;
         margin-bottom: -3px;
+        max-height: 300px;
+        object-fit: cover;
     }
     &__title-container {
         background: #E7E7E7;

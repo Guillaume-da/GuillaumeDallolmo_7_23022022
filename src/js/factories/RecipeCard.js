@@ -9,7 +9,7 @@ export class RecipeCard {
 		const article = document.createElement('article');
 		article.classList.add('recipes__item');
 		const recipeCard = `
-                <img src="src/img/recipe-img.svg" alt="recipe" class="recipes__image">
+                <img src="src/img/${data.img ? `${data.img}` : 'recipe-img.svg'} " alt="recipe" class="recipes__image">
                 <div class="recipes__title-container">
                     <h2 class="recipes__title">${data.name}</h2>
                     <span class="recipes__duration"><i class="fas fa-clock"></i> ${data.time} min</span>
