@@ -4,7 +4,7 @@ Exercise carried out as part of my training with OpenClassrooms.
 
 # Purpose:
 
-Implement the search functionality of a cooking recipe website by performing 2 different versions in order to compare their performance.
+Implement the search functionality of a cooking recipe website by performing 2 different versions in order to compare their performance.   
 algo1 branch: using native loops   
 algo2 branch: using Javascript array methods   
 
